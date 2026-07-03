@@ -8,11 +8,6 @@ if (isset($_SESSION['user_id'])) {
     exit;
 }
 
-// Show landing page for guests
-if (!isset($_POST['email'])) {
-    header('Location: /landing/index.html');
-    exit;
-}
 
 $settings   = getSettings($pdo);
 $appName    = $settings['app_name']      ?? 'Asset Manager';
