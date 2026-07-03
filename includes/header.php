@@ -6,7 +6,7 @@ requireLogin();
 $settings   = getSettings($pdo);
 $company    = $settings['company_name']  ?? 'Asset Manager';
 $appName    = $settings['app_name']      ?? 'Asset Manager';
-$logoPath   = $settings['logo_path']     ?? 'assets/img/logo.png';
+$logoPath   = $settings['logo_path']     ?? 'assets/img/logo.svg';
 $primaryClr = $settings['primary_color'] ?? '#E84B37';
 $sidebarClr = $settings['sidebar_color'] ?? '#1a1a2e';
 $user       = currentUser();

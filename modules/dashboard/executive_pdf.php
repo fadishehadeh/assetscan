@@ -10,7 +10,7 @@ $currency = $settings['currency'] ?? 'USD';
 $primary  = $settings['primary_color'] ?? '#E84B37';
 $company  = $settings['company_name']  ?? 'Asset Manager';
 $appName  = $settings['app_name']      ?? 'Asset Manager';
-$logoPath = $settings['logo_path']     ?? 'assets/img/logo.png';
+$logoPath = $settings['logo_path']     ?? 'assets/img/logo.svg';
 
 // ── KPI Queries ────────────────────────────────────────────────────────────
 $totalAssets            = (int)$pdo->query("SELECT COUNT(*) FROM assets")->fetchColumn();

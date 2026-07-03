@@ -230,7 +230,7 @@ if ($action === 'export_pdf') {
     <h1>Selected Assets Export</h1>
     <div class="meta"><?= e($company) ?> &nbsp;&middot;&nbsp; Generated: <?= date('d M Y, H:i') ?> &nbsp;&middot;&nbsp; By: <?= e($_SESSION['user_name'] ?? '') ?></div>
   </div>
-  <img src="/asset-manager/<?= e($settings['logo_path'] ?? 'assets/img/logo.png') ?>" class="logo" alt="">
+  <img src="/asset-manager/<?= e($settings['logo_path'] ?? 'assets/img/logo.svg') ?>" class="logo" alt="">
 </div>
 
 <div class="summary">

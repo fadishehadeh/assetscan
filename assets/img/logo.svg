@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 52" role="img">
+  <title>AssetScan</title>
+  <!-- QR icon box -->
+  <rect x="0" y="4" width="44" height="44" rx="10" fill="#E84B37"/>
+  <!-- QR corner squares -->
+  <rect x="6" y="10" width="13" height="13" rx="2" fill="none" stroke="#fff" stroke-width="2.5"/>
+  <rect x="25" y="10" width="13" height="13" rx="2" fill="none" stroke="#fff" stroke-width="2.5"/>
+  <rect x="6" y="29" width="13" height="13" rx="2" fill="none" stroke="#fff" stroke-width="2.5"/>
+  <!-- QR dots bottom-right -->
+  <rect x="28" y="32" width="4" height="4" rx="1" fill="#fff"/>
+  <rect x="34" y="32" width="4" height="4" rx="1" fill="#fff"/>
+  <rect x="28" y="38" width="10" height="4" rx="1" fill="#fff"/>
+  <!-- QR inner dots -->
+  <rect x="8" y="12" width="9" height="9" rx="1.5" fill="#fff"/>
+  <rect x="27" y="12" width="9" height="9" rx="1.5" fill="#fff"/>
+  <rect x="8" y="31" width="9" height="9" rx="1.5" fill="#fff"/>
+  <!-- Wordmark -->
+  <text x="54" y="34" font-family="Inter,Arial,sans-serif" font-size="28" font-weight="900" letter-spacing="-1" fill="#ffffff">Asset<tspan fill="#E84B37">Scan</tspan></text>
+</svg>

@@ -61,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (!is_dir($uploadDir)) mkdir($uploadDir, 0755, true);
             $filename = 'logo_' . time() . '.' . $ext;
             if (move_uploaded_file($_FILES['logo']['tmp_name'], $uploadDir . $filename)) {
-                if ($s['logo_path'] && $s['logo_path'] !== 'assets/img/logo.png'
+                if ($s['logo_path'] && $s['logo_path'] !== 'assets/img/logo.svg'
                     && file_exists(__DIR__ . '/../../' . $s['logo_path'])) {
                     @unlink(__DIR__ . '/../../' . $s['logo_path']);
                 }
@@ -70,11 +70,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         if (isset($_POST['reset_logo'])) {
-            if ($s['logo_path'] !== 'assets/img/logo.png'
+            if ($s['logo_path'] !== 'assets/img/logo.svg'
                 && file_exists(__DIR__ . '/../../' . $s['logo_path'])) {
                 @unlink(__DIR__ . '/../../' . $s['logo_path']);
             }
-            $logoPath = 'assets/img/logo.png';
+            $logoPath = 'assets/img/logo.svg';
         }
 
         $pdo->prepare("UPDATE settings SET app_name=?, company_name=?, primary_color=?, sidebar_color=?, logo_path=? WHERE id=1")
@@ -404,13 +404,13 @@ require_once __DIR__ . '/../../includes/header.php';
         <div class="card-body">
           <div class="d-flex align-items-center gap-4 mb-4">
             <div style="background:#0f1117;padding:12px 20px;border-radius:10px;flex-shrink:0;">
-              <img id="logoPreview" src="/asset-manager/<?= e($s['logo_path'] ?? 'assets/img/logo.png') ?>"
+              <img id="logoPreview" src="/asset-manager/<?= e($s['logo_path'] ?? 'assets/img/logo.svg') ?>"
                    alt="Logo" style="height:38px;width:auto;max-width:180px;object-fit:contain;">
             </div>
             <div>
               <div class="fw-semibold small mb-1">Current logo</div>
-              <div class="text-muted" style="font-size:12px;"><?= e(basename($s['logo_path'] ?? 'logo.png')) ?></div>
-              <?php if (($s['logo_path'] ?? '') !== 'assets/img/logo.png'): ?>
+              <div class="text-muted" style="font-size:12px;"><?= e(basename($s['logo_path'] ?? 'logo.svg')) ?></div>
+              <?php if (($s['logo_path'] ?? '') !== 'assets/img/logo.svg'): ?>
               <button type="submit" name="reset_logo" value="1" class="btn btn-outline-secondary btn-sm mt-2 py-0"
                       onclick="return confirm('Reset to default G2 logo?')">
                 <i class="bi bi-arrow-counterclockwise me-1"></i>Reset to default
@@ -504,7 +504,7 @@ require_once __DIR__ . '/../../includes/header.php';
 
           <!-- Topbar mock -->
           <div id="previewTopbar" style="background:<?= e($s['sidebar_color'] ?? '#0f1117') ?>;padding:10px 14px;display:flex;align-items:center;gap:10px;border-bottom:3px solid <?= e($s['primary_color'] ?? '#E84B37') ?>;">
-            <img id="previewLogo" src="/asset-manager/<?= e($s['logo_path'] ?? 'assets/img/logo.png') ?>"
+            <img id="previewLogo" src="/asset-manager/<?= e($s['logo_path'] ?? 'assets/img/logo.svg') ?>"
                  style="height:26px;width:auto;object-fit:contain;max-width:130px;">
             <span id="previewAppName" style="color:rgba(255,255,255,.5);font-size:11px;flex:1;"><?= e($s['app_name'] ?? 'Asset Manager') ?></span>
             <span id="previewBadge" style="background:<?= e($s['primary_color'] ?? '#E84B37') ?>;color:#fff;font-size:10px;padding:3px 8px;border-radius:5px;font-weight:700;">Super Admin</span>
@@ -557,7 +557,7 @@ require_once __DIR__ . '/../../includes/header.php';
             <div style="font-size:10px;color:#94a3b8;text-align:center;margin-bottom:7px;">Login Preview</div>
             <div style="border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.10);max-width:180px;margin:0 auto;">
               <div id="previewLoginTop" style="background:<?= e($s['sidebar_color'] ?? '#0f1117') ?>;padding:10px;text-align:center;border-bottom:2px solid <?= e($s['primary_color'] ?? '#E84B37') ?>;">
-                <img id="previewLoginLogo" src="/asset-manager/<?= e($s['logo_path'] ?? 'assets/img/logo.png') ?>"
+                <img id="previewLoginLogo" src="/asset-manager/<?= e($s['logo_path'] ?? 'assets/img/logo.svg') ?>"
                      style="height:20px;width:auto;object-fit:contain;max-width:120px;">
               </div>
               <div style="background:#fff;padding:9px;">

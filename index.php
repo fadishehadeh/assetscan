@@ -17,7 +17,7 @@ if (!isset($_POST['email'])) {
 $settings   = getSettings($pdo);
 $appName    = $settings['app_name']      ?? 'Asset Manager';
 $company    = $settings['company_name']  ?? 'My Company';
-$logoPath   = $settings['logo_path']     ?? 'assets/img/logo.png';
+$logoPath   = $settings['logo_path']     ?? 'assets/img/logo.svg';
 $primaryClr = $settings['primary_color'] ?? '#E84B37';
 $sidebarClr = $settings['sidebar_color'] ?? '#111827';
 

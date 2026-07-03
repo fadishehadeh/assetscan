@@ -12,7 +12,7 @@ if (empty($_SESSION['pending_user_id'])) {
 $userId   = (int)$_SESSION['pending_user_id'];
 $settings = getSettings($pdo);
 $primary  = $settings['primary_color'] ?? '#E84B37';
-$logoPath = $settings['logo_path']     ?? 'assets/img/logo.png';
+$logoPath = $settings['logo_path']     ?? 'assets/img/logo.svg';
 $appName  = $settings['app_name']      ?? 'Asset Manager';
 
 $user = $pdo->prepare("SELECT * FROM users WHERE id=?");

@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if (move_uploaded_file($_FILES['logo']['tmp_name'], $destPath)) {
             // Remove old custom logo (not the default)
-            if ($s['logo_path'] && $s['logo_path'] !== 'assets/img/logo.png'
+            if ($s['logo_path'] && $s['logo_path'] !== 'assets/img/logo.svg'
                 && file_exists(__DIR__ . '/../../' . $s['logo_path'])) {
                 @unlink(__DIR__ . '/../../' . $s['logo_path']);
             }
@@ -49,11 +49,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Handle reset to default logo
     if (isset($_POST['reset_logo'])) {
-        if ($s['logo_path'] && $s['logo_path'] !== 'assets/img/logo.png'
+        if ($s['logo_path'] && $s['logo_path'] !== 'assets/img/logo.svg'
             && file_exists(__DIR__ . '/../../' . $s['logo_path'])) {
             @unlink(__DIR__ . '/../../' . $s['logo_path']);
         }
-        $logoPath = 'assets/img/logo.png';
+        $logoPath = 'assets/img/logo.svg';
     }
 
     $pdo->prepare("UPDATE settings SET app_name=?, company_name=?, primary_color=?, sidebar_color=?, logo_path=? WHERE id=1")
@@ -100,13 +100,13 @@ $s = getSettings($pdo); // Reload after save
         <div class="d-flex align-items-center gap-4 mb-4">
           <div style="background:#1a1a2e;padding:12px 20px;border-radius:10px;">
             <img id="logoPreview"
-                 src="/asset-manager/<?= e($s['logo_path'] ?? 'assets/img/logo.png') ?>"
+                 src="/asset-manager/<?= e($s['logo_path'] ?? 'assets/img/logo.svg') ?>"
                  alt="Current Logo"
                  style="height:40px;width:auto;max-width:200px;object-fit:contain;">
           </div>
           <div>
             <div class="fw-semibold small mb-1">Current Logo</div>
-            <div class="text-muted" style="font-size:12px;"><?= e(basename($s['logo_path'] ?? 'logo.png')) ?></div>
+            <div class="text-muted" style="font-size:12px;"><?= e(basename($s['logo_path'] ?? 'logo.svg')) ?></div>
           </div>
         </div>
 
@@ -115,7 +115,7 @@ $s = getSettings($pdo); // Reload after save
                onchange="previewLogo(this)">
         <div class="text-muted" style="font-size:12px;">PNG, SVG, or JPG. Max 2MB. Recommended height: 40–60px.</div>
 
-        <?php if (($s['logo_path'] ?? '') !== 'assets/img/logo.png'): ?>
+        <?php if (($s['logo_path'] ?? '') !== 'assets/img/logo.svg'): ?>
         <div class="mt-3">
           <button type="submit" name="reset_logo" value="1" class="btn btn-outline-secondary btn-sm"
                   onclick="return confirm('Reset to default G2 logo?')">
@@ -212,7 +212,7 @@ $s = getSettings($pdo); // Reload after save
 
         <!-- Mock topbar -->
         <div id="previewTopbar" style="background:<?= e($s['sidebar_color'] ?? '#1a1a2e') ?>;padding:10px 14px;display:flex;align-items:center;gap:10px;border-bottom:3px solid <?= e($s['primary_color'] ?? '#E84B37') ?>;">
-          <img id="previewLogo" src="/asset-manager/<?= e($s['logo_path'] ?? 'assets/img/logo.png') ?>"
+          <img id="previewLogo" src="/asset-manager/<?= e($s['logo_path'] ?? 'assets/img/logo.svg') ?>"
                style="height:28px;width:auto;object-fit:contain;max-width:140px;">
           <span style="color:rgba(255,255,255,.5);font-size:11px;margin-left:6px;" id="previewAppName"><?= e($s['app_name'] ?? 'Asset Manager') ?></span>
           <span style="flex:1"></span>
@@ -270,7 +270,7 @@ $s = getSettings($pdo); // Reload after save
           <div style="font-size:10px;color:#94a3b8;text-align:center;margin-bottom:8px;">Login Screen Preview</div>
           <div style="border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.1);max-width:200px;margin:0 auto;">
             <div id="previewLoginTop" style="background:<?= e($s['sidebar_color'] ?? '#1a1a2e') ?>;padding:10px;text-align:center;border-bottom:2px solid <?= e($s['primary_color'] ?? '#E84B37') ?>;">
-              <img id="previewLoginLogo" src="/asset-manager/<?= e($s['logo_path'] ?? 'assets/img/logo.png') ?>"
+              <img id="previewLoginLogo" src="/asset-manager/<?= e($s['logo_path'] ?? 'assets/img/logo.svg') ?>"
                    style="height:22px;width:auto;object-fit:contain;max-width:130px;">
             </div>
             <div style="background:#fff;padding:10px;">
