@@ -1,0 +1,22 @@
+Options -Indexes
+
+# Allow direct access to all PHP files
+<FilesMatch "\.php$">
+    Allow from all
+</FilesMatch>
+
+# Prevent direct access to config
+<FilesMatch "^db\.php$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Rewrite rules
+RewriteEngine On
+
+# Force HTTPS (uncomment after SSL is active)
+# RewriteCond %{HTTPS} off
+# RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Landing page as homepage
+RewriteRule ^$ /landing/index.html [L]
