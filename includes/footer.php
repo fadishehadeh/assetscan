@@ -2,7 +2,7 @@
 </main><!-- /.page-wrapper -->
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="/asset-manager/assets/js/main.js"></script>
+<script src="/assets/js/main.js"></script>
 <script>
 // Global search
 (function(){
@@ -21,7 +21,7 @@
     const q = input.value.trim();
     if (q.length < 2) { close(); return; }
     timer = setTimeout(() => {
-      fetch('/asset-manager/search.php?format=json&q=' + encodeURIComponent(q))
+      fetch('/search.php?format=json&q=' + encodeURIComponent(q))
         .then(r => r.json())
         .then(data => {
           if (!data.length) { close(); return; }
@@ -54,7 +54,7 @@
 })();
 // PWA service worker
 if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/asset-manager/assets/js/sw.js').catch(() => {});
+  navigator.serviceWorker.register('/assets/js/sw.js').catch(() => {});
 }
 </script>
 </body>

@@ -6,7 +6,7 @@ require_once __DIR__ . '/../../includes/functions.php';
 requireLogin();
 if (!isAdmin()) {
     setFlash('danger', 'Access denied.');
-    header('Location: /asset-manager/index.php');
+    header('Location: /index.php');
     exit;
 }
 

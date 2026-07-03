@@ -54,5 +54,5 @@ echo json_encode([
     'assigned'     => $row['assigned_name'] ?? '',
     'cat'          => $row['cat_name']      ?? '',
     'serial'       => $row['serial_number'] ?? '',
-    'view_url'     => '/asset-manager/modules/assets/view.php?id=' . (int)$row['id'],
+    'view_url'     => '/modules/assets/view.php?id=' . (int)$row['id'],
 ]);

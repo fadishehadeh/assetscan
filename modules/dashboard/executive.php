@@ -224,10 +224,10 @@ require_once __DIR__ . '/../../includes/header.php';
     <p class="subtitle">Management overview &nbsp;·&nbsp; <?= date('d F Y') ?></p>
   </div>
   <div class="actions">
-    <a href="/asset-manager/modules/dashboard/executive_pdf.php" class="btn-ghost" target="_blank">
+    <a href="/modules/dashboard/executive_pdf.php" class="btn-ghost" target="_blank">
       <i class="bi bi-printer"></i> Export PDF
     </a>
-    <a href="/asset-manager/modules/dashboard/index.php" class="btn-ghost">
+    <a href="/modules/dashboard/index.php" class="btn-ghost">
       <i class="bi bi-arrow-left"></i> Dashboard
     </a>
   </div>
@@ -340,7 +340,7 @@ require_once __DIR__ . '/../../includes/header.php';
     <div class="chart-card">
       <div class="chart-card-header">
         <h6><i class="bi bi-diagram-3 me-2 text-primary"></i>Assets by Department</h6>
-        <a href="/asset-manager/modules/departments/index.php" class="btn btn-sm btn-outline-primary" style="font-size:.78rem;padding:4px 12px">View All</a>
+        <a href="/modules/departments/index.php" class="btn btn-sm btn-outline-primary" style="font-size:.78rem;padding:4px 12px">View All</a>
       </div>
       <div class="chart-body p-0">
         <div class="table-responsive">

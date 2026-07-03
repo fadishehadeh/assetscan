@@ -34,7 +34,7 @@ function generateAssetTag(PDO $pdo): string {
 function generateQRCode(int $assetId, string $assetTag): string {
     $qrDir  = __DIR__ . '/../uploads/qrcodes/';
     $file   = $qrDir . 'asset_' . $assetId . '.png';
-    $url    = 'http://' . $_SERVER['HTTP_HOST'] . '/asset-manager/modules/assets/view.php?id=' . $assetId;
+    $url    = 'http://' . $_SERVER['HTTP_HOST'] . '/modules/assets/view.php?id=' . $assetId;
 
     if (!file_exists($file)) {
         require_once __DIR__ . '/../libs/phpqrcode/qrlib.php';

@@ -1,7 +1,7 @@
 <?php
 /**
  * One-time seeder: inserts 50 realistic demo assets.
- * Run once via browser: http://localhost/asset-manager/seed_assets.php
+ * Run once via browser: http://localhost/seed_assets.php
  * DELETE this file after running.
  */
 if (session_status() === PHP_SESSION_NONE) session_start();
@@ -146,5 +146,5 @@ foreach ($assets as $i => $a) {
 
 echo "<h2>Seeder Done</h2>";
 echo "<p>Inserted: <strong>{$inserted}</strong> | Skipped (already exists): <strong>{$skipped}</strong></p>";
-echo "<p><a href='/asset-manager/modules/assets/index.php'>Go to Assets</a></p>";
+echo "<p><a href='/modules/assets/index.php'>Go to Assets</a></p>";
 echo "<p style='color:red'><strong>Delete this file now:</strong> seed_assets.php</p>";

@@ -7,14 +7,14 @@ require_once __DIR__ . '/../../includes/functions.php';
 requireLogin();
 if (!isIT()) {
     setFlash('danger', 'Access denied. Admin or IT role required.');
-    header('Location: /asset-manager/modules/dashboard/index.php');
+    header('Location: /modules/dashboard/index.php');
     exit;
 }
 
 // Only accept POST
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     setFlash('danger', 'Invalid request method.');
-    header('Location: /asset-manager/modules/assets/index.php');
+    header('Location: /modules/assets/index.php');
     exit;
 }
 
@@ -29,11 +29,11 @@ $stAsset->execute([$assetId]);
 $asset = $stAsset->fetch();
 if (!$asset) {
     setFlash('danger', 'Asset not found.');
-    header('Location: /asset-manager/modules/assets/index.php');
+    header('Location: /modules/assets/index.php');
     exit;
 }
 
-$redirectBase = "/asset-manager/modules/assets/view.php?id={$assetId}#documents";
+$redirectBase = "/modules/assets/view.php?id={$assetId}#documents";
 
 $errors = [];
 

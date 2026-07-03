@@ -145,7 +145,7 @@ switch ($report) {
     <h1><?= e($title) ?></h1>
     <div class="meta"><?= e($company) ?> &nbsp;·&nbsp; Generated: <?= date('d M Y, H:i') ?> &nbsp;·&nbsp; By: <?= e($_SESSION['user_name'] ?? '') ?></div>
   </div>
-  <img src="/asset-manager/<?= e($settings['logo_path'] ?? 'assets/img/logo.svg') ?>" class="logo" alt="">
+  <img src="/<?= e($settings['logo_path'] ?? 'assets/img/logo.svg') ?>" class="logo" alt="">
 </div>
 
 <div class="summary">

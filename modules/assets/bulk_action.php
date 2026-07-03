@@ -12,7 +12,7 @@ $action = $_POST['bulk_action'] ?? '';
 $rawIds = $_POST['ids'] ?? [];
 if (!is_array($rawIds) || empty($rawIds)) {
     setFlash('warning', 'No assets selected.');
-    header('Location: /asset-manager/modules/assets/index.php');
+    header('Location: /modules/assets/index.php');
     exit;
 }
 
@@ -20,7 +20,7 @@ if (!is_array($rawIds) || empty($rawIds)) {
 $ids = array_values(array_filter(array_map('intval', $rawIds)));
 if (empty($ids)) {
     setFlash('warning', 'No valid asset IDs selected.');
-    header('Location: /asset-manager/modules/assets/index.php');
+    header('Location: /modules/assets/index.php');
     exit;
 }
 if (count($ids) > 500) {
@@ -32,7 +32,7 @@ $placeholders = implode(',', array_fill(0, count($ids), '?'));
 // ── Mutating actions require admin ────────────────────────────────────────────
 if (in_array($action, ['assign_dept', 'change_status'], true) && !isAdmin()) {
     setFlash('danger', 'Only administrators can perform bulk updates.');
-    header('Location: /asset-manager/modules/assets/index.php');
+    header('Location: /modules/assets/index.php');
     exit;
 }
 
@@ -41,7 +41,7 @@ if ($action === 'assign_dept') {
     $deptId = (int)($_POST['bulk_dept_id'] ?? 0);
     if ($deptId <= 0) {
         setFlash('danger', 'Please select a valid department.');
-        header('Location: /asset-manager/modules/assets/index.php');
+        header('Location: /modules/assets/index.php');
         exit;
     }
 
@@ -50,7 +50,7 @@ if ($action === 'assign_dept') {
     $deptCheck->execute([$deptId]);
     if (!$deptCheck->fetch()) {
         setFlash('danger', 'Selected department does not exist.');
-        header('Location: /asset-manager/modules/assets/index.php');
+        header('Location: /modules/assets/index.php');
         exit;
     }
 
@@ -79,7 +79,7 @@ if ($action === 'assign_dept') {
         setFlash('danger', 'Bulk update failed: ' . $e->getMessage());
     }
 
-    header('Location: /asset-manager/modules/assets/index.php');
+    header('Location: /modules/assets/index.php');
     exit;
 }
 
@@ -89,7 +89,7 @@ if ($action === 'change_status') {
     $newStatus = $_POST['bulk_status'] ?? '';
     if (!in_array($newStatus, $validStatuses, true)) {
         setFlash('danger', 'Please select a valid status.');
-        header('Location: /asset-manager/modules/assets/index.php');
+        header('Location: /modules/assets/index.php');
         exit;
     }
 
@@ -118,7 +118,7 @@ if ($action === 'change_status') {
         setFlash('danger', 'Bulk status update failed: ' . $e->getMessage());
     }
 
-    header('Location: /asset-manager/modules/assets/index.php');
+    header('Location: /modules/assets/index.php');
     exit;
 }
 
@@ -230,7 +230,7 @@ if ($action === 'export_pdf') {
     <h1>Selected Assets Export</h1>
     <div class="meta"><?= e($company) ?> &nbsp;&middot;&nbsp; Generated: <?= date('d M Y, H:i') ?> &nbsp;&middot;&nbsp; By: <?= e($_SESSION['user_name'] ?? '') ?></div>
   </div>
-  <img src="/asset-manager/<?= e($settings['logo_path'] ?? 'assets/img/logo.svg') ?>" class="logo" alt="">
+  <img src="/<?= e($settings['logo_path'] ?? 'assets/img/logo.svg') ?>" class="logo" alt="">
 </div>
 
 <div class="summary">
@@ -284,5 +284,5 @@ if ($action === 'export_pdf') {
 
 // ── Unknown action ────────────────────────────────────────────────────────────
 setFlash('warning', 'Unknown bulk action.');
-header('Location: /asset-manager/modules/assets/index.php');
+header('Location: /modules/assets/index.php');
 exit;

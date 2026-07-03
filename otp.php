@@ -6,7 +6,7 @@ require_once __DIR__ . '/includes/mail.php';
 
 // Must have pending_user_id in session
 if (empty($_SESSION['pending_user_id'])) {
-    header('Location: /asset-manager/index.php'); exit;
+    header('Location: /index.php'); exit;
 }
 
 $userId   = (int)$_SESSION['pending_user_id'];
@@ -18,7 +18,7 @@ $appName  = $settings['app_name']      ?? 'Asset Manager';
 $user = $pdo->prepare("SELECT * FROM users WHERE id=?");
 $user->execute([$userId]);
 $user = $user->fetch();
-if (!$user) { session_destroy(); header('Location: /asset-manager/index.php'); exit; }
+if (!$user) { session_destroy(); header('Location: /index.php'); exit; }
 
 $error = '';
 
@@ -38,7 +38,7 @@ if (empty($_SESSION['otp_sent'])) {
 // ── Resend ────────────────────────────────────────────────────────────
 if (isset($_GET['resend'])) {
     unset($_SESSION['otp_sent']);
-    header('Location: /asset-manager/otp.php'); exit;
+    header('Location: /otp.php'); exit;
 }
 
 // ── Verify OTP ────────────────────────────────────────────────────────
@@ -61,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['user_role'] = $user['role'];
             unset($_SESSION['pending_user_id'], $_SESSION['otp_sent']);
 
-            header('Location: /asset-manager/modules/dashboard/index.php'); exit;
+            header('Location: /modules/dashboard/index.php'); exit;
         } else {
             $error = 'Invalid or expired code. Please try again or resend.';
         }
@@ -78,7 +78,7 @@ function e(string $s): string { return htmlspecialchars($s, ENT_QUOTES|ENT_SUBST
 <title>Verify OTP — <?= e($appName) ?></title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-<link rel="stylesheet" href="/asset-manager/assets/css/style.css">
+<link rel="stylesheet" href="/assets/css/style.css">
 <style>
   :root { --brand-primary: <?= e($primary) ?>; }
   body { background: linear-gradient(135deg, #0f172a 0%, #1e293b 55%, #111827 100%); }
@@ -102,7 +102,7 @@ function e(string $s): string { return htmlspecialchars($s, ENT_QUOTES|ENT_SUBST
 <div class="otp-wrap">
   <div class="otp-card">
     <div class="otp-top">
-      <img src="/asset-manager/<?= e($logoPath) ?>" alt="<?= e($appName) ?>">
+      <img src="/<?= e($logoPath) ?>" alt="<?= e($appName) ?>">
       <div style="color:rgba(255,255,255,.45);font-size:11px;letter-spacing:.8px;text-transform:uppercase;">Two-Factor Verification</div>
     </div>
     <div class="otp-body">
@@ -136,7 +136,7 @@ function e(string $s): string { return htmlspecialchars($s, ENT_QUOTES|ENT_SUBST
         </small>
       </div>
       <div class="mt-2 text-center">
-        <a href="/asset-manager/index.php" class="small text-muted">← Back to Login</a>
+        <a href="/index.php" class="small text-muted">← Back to Login</a>
       </div>
     </div>
   </div>

@@ -51,7 +51,7 @@ $settings = getSettings($pdo);
       <div class="company-name"><?= e($settings['company_name'] ?? 'Company') ?></div>
       <div class="asset-tag"><?= e($a['asset_tag']) ?></div>
       <div class="asset-name"><?= e($a['name']) ?></div>
-      <img src="/asset-manager/<?= e($a['qr_code_path']) ?>" class="qr-img" alt="QR Code">
+      <img src="/<?= e($a['qr_code_path']) ?>" class="qr-img" alt="QR Code">
       <div class="meta">
         <?php if ($a['serial_number']): ?>S/N: <?= e($a['serial_number']) ?><br><?php endif; ?>
         Scan to view full details

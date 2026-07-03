@@ -63,12 +63,12 @@ $expired = $pdo->query(
         ?>
         <tr>
           <td><code><?= e($a['asset_tag']) ?></code></td>
-          <td><a href="/asset-manager/modules/assets/view.php?id=<?= $a['id'] ?>" class="fw-semibold text-dark text-decoration-none"><?= e($a['name']) ?></a></td>
+          <td><a href="/modules/assets/view.php?id=<?= $a['id'] ?>" class="fw-semibold text-dark text-decoration-none"><?= e($a['name']) ?></a></td>
           <td><span class="badge bg-light text-dark"><?= e($a['cat_name'] ?? '—') ?></span></td>
           <td><?= date('d M Y', strtotime($a['warranty_expiry'])) ?></td>
           <td><span class="badge bg-<?= $urgency ?>"><?= $a['days_left'] ?> days</span></td>
           <td><?= e($a['assigned_name'] ?? '—') ?></td>
-          <td><a href="/asset-manager/modules/assets/edit.php?id=<?= $a['id'] ?>" class="btn btn-sm btn-outline-secondary py-0 px-2"><i class="bi bi-pencil"></i></a></td>
+          <td><a href="/modules/assets/edit.php?id=<?= $a['id'] ?>" class="btn btn-sm btn-outline-secondary py-0 px-2"><i class="bi bi-pencil"></i></a></td>
         </tr>
         <?php endforeach; ?>
       </tbody>
@@ -93,7 +93,7 @@ $expired = $pdo->query(
         <?php foreach ($expired as $a): ?>
         <tr>
           <td><code><?= e($a['asset_tag']) ?></code></td>
-          <td><a href="/asset-manager/modules/assets/view.php?id=<?= $a['id'] ?>" class="fw-semibold text-dark text-decoration-none"><?= e($a['name']) ?></a></td>
+          <td><a href="/modules/assets/view.php?id=<?= $a['id'] ?>" class="fw-semibold text-dark text-decoration-none"><?= e($a['name']) ?></a></td>
           <td><span class="badge bg-light text-dark"><?= e($a['cat_name'] ?? '—') ?></span></td>
           <td class="text-danger"><?= date('d M Y', strtotime($a['warranty_expiry'])) ?></td>
           <td><span class="badge bg-secondary"><?= $a['days_ago'] ?> days ago</span></td>

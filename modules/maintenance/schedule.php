@@ -58,7 +58,7 @@ require_once __DIR__ . '/../../includes/header.php';
       </button>
     </form>
     <?php endif; ?>
-    <a href="/asset-manager/modules/maintenance/index.php" class="btn btn-outline-secondary btn-sm">
+    <a href="/modules/maintenance/index.php" class="btn btn-outline-secondary btn-sm">
       <i class="bi bi-arrow-left me-1"></i>All Maintenance
     </a>
   </div>
@@ -130,7 +130,7 @@ require_once __DIR__ . '/../../includes/header.php';
               <?php endif; ?>
             </td>
             <td>
-              <a href="/asset-manager/modules/assets/view.php?id=<?= (int)$rec['asset_id'] ?>" class="text-decoration-none fw-semibold">
+              <a href="/modules/assets/view.php?id=<?= (int)$rec['asset_id'] ?>" class="text-decoration-none fw-semibold">
                 <?= htmlspecialchars($rec['asset_name']) ?>
               </a>
               <br>
@@ -150,7 +150,7 @@ require_once __DIR__ . '/../../includes/header.php';
               <span class="badge <?= $badgeClass ?> px-3 py-2"><?= htmlspecialchars($daysLabel) ?></span>
             </td>
             <td>
-              <a href="/asset-manager/modules/maintenance/view.php?id=<?= (int)$rec['id'] ?>"
+              <a href="/modules/maintenance/view.php?id=<?= (int)$rec['id'] ?>"
                  class="btn btn-sm btn-outline-secondary py-0 px-2">
                 <i class="bi bi-eye"></i>
               </a>

@@ -9,7 +9,7 @@ function isLoggedIn(): bool {
 
 function requireLogin(): void {
     if (!isLoggedIn()) {
-        header('Location: /asset-manager/index.php');
+        header('Location: /index.php');
         exit;
     }
 }
@@ -17,7 +17,7 @@ function requireLogin(): void {
 function requireRole(string ...$roles): void {
     requireLogin();
     if (!in_array($_SESSION['user_role'], $roles, true)) {
-        header('Location: /asset-manager/modules/dashboard/index.php?error=unauthorized');
+        header('Location: /modules/dashboard/index.php?error=unauthorized');
         exit;
     }
 }

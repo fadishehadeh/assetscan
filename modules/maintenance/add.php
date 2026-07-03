@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         logAssetHistory($pdo, $assetId, 'maintenance_logged', null, $type, $notes);
 
         setFlash('success', 'Maintenance record saved.');
-        header('Location: /asset-manager/modules/assets/view.php?id=' . $assetId);
+        header('Location: /modules/assets/view.php?id=' . $assetId);
         exit;
     }
 }

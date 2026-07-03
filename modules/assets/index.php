@@ -79,11 +79,11 @@ require_once __DIR__ . '/../../includes/header.php';
   </div>
   <div class="d-flex gap-2">
     <?php if (isAdmin() || isIT()): ?>
-    <a href="/asset-manager/modules/assets/add.php" class="btn btn-primary">
+    <a href="/modules/assets/add.php" class="btn btn-primary">
       <i class="bi bi-plus-circle me-1"></i> Add Asset
     </a>
     <?php endif; ?>
-    <a href="/asset-manager/modules/assets/bulk_qr.php" class="btn btn-outline-success" target="_blank">
+    <a href="/modules/assets/bulk_qr.php" class="btn btn-outline-success" target="_blank">
       <i class="bi bi-qr-code me-1"></i> Bulk QR
     </a>
     <?php
@@ -94,9 +94,9 @@ require_once __DIR__ . '/../../includes/header.php';
         <i class="bi bi-download me-1"></i> Export
       </button>
       <ul class="dropdown-menu dropdown-menu-end">
-        <li><a class="dropdown-item" href="/asset-manager/modules/reports/export_csv.php?report=assets&<?= $exportQ ?>"><i class="bi bi-filetype-csv me-2"></i>CSV (current filter)</a></li>
-        <li><a class="dropdown-item" href="/asset-manager/modules/reports/export_csv.php?report=assets&format=excel&<?= $exportQ ?>"><i class="bi bi-file-earmark-excel me-2"></i>Excel (current filter)</a></li>
-        <li><a class="dropdown-item" href="/asset-manager/modules/reports/export_pdf.php?report=assets" target="_blank"><i class="bi bi-file-earmark-pdf me-2"></i>PDF (all assets)</a></li>
+        <li><a class="dropdown-item" href="/modules/reports/export_csv.php?report=assets&<?= $exportQ ?>"><i class="bi bi-filetype-csv me-2"></i>CSV (current filter)</a></li>
+        <li><a class="dropdown-item" href="/modules/reports/export_csv.php?report=assets&format=excel&<?= $exportQ ?>"><i class="bi bi-file-earmark-excel me-2"></i>Excel (current filter)</a></li>
+        <li><a class="dropdown-item" href="/modules/reports/export_pdf.php?report=assets" target="_blank"><i class="bi bi-file-earmark-pdf me-2"></i>PDF (all assets)</a></li>
       </ul>
     </div>
   </div>
@@ -201,7 +201,7 @@ require_once __DIR__ . '/../../includes/header.php';
 </div>
 
 <!-- BULK FORM wraps bar + table -->
-<form id="bulkForm" method="POST" action="/asset-manager/modules/assets/bulk_action.php">
+<form id="bulkForm" method="POST" action="/modules/assets/bulk_action.php">
 
 <!-- BULK ACTION BAR (hidden until ≥1 checkbox checked) -->
 <div id="bulkBar" class="d-none mb-2 p-2 bg-white border rounded d-flex align-items-center gap-2 flex-wrap">

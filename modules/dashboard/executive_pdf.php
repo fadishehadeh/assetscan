@@ -212,14 +212,14 @@ body { font-family: 'Segoe UI', Arial, Helvetica, sans-serif; font-size: 11.5px;
 <!-- ── PRINT BAR ──────────────────────────────────────────────────────── -->
 <div class="no-print">
   <button onclick="window.print()">&#128438; Print / Save as PDF</button>
-  <a href="/asset-manager/modules/dashboard/executive.php">&#8592; Back to Executive Dashboard</a>
+  <a href="/modules/dashboard/executive.php">&#8592; Back to Executive Dashboard</a>
 </div>
 
 <!-- ── REPORT HEADER ──────────────────────────────────────────────────── -->
 <div class="report-header">
   <div class="header-left">
     <div class="logo-wrap">
-      <img src="/asset-manager/<?= e($logoPath) ?>" class="logo" alt="<?= e($appName) ?>">
+      <img src="/<?= e($logoPath) ?>" class="logo" alt="<?= e($appName) ?>">
     </div>
     <div>
       <div style="font-size:10px;opacity:.7;text-transform:uppercase;letter-spacing:1px;margin-bottom:2px"><?= e($company) ?></div>

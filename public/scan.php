@@ -1,7 +1,7 @@
 <?php
 /**
  * Public asset scan page — NO login required.
- * Accessed via QR code: /asset-manager/public/scan.php?tag=AST-XXXXXX
+ * Accessed via QR code: /public/scan.php?tag=AST-XXXXXX
  */
 
 require_once __DIR__ . '/../config/db.php';
@@ -368,7 +368,7 @@ $mailtoLink    = $alertEmail
   <div class="scan-card">
     <div class="scan-header">
       <?php if ($logoPath): ?>
-        <img src="/asset-manager/<?= $logoPath ?>" alt="<?= $appName ?>" class="scan-logo">
+        <img src="/<?= $logoPath ?>" alt="<?= $appName ?>" class="scan-logo">
       <?php else: ?>
         <span class="scan-logo-placeholder"><i class="bi bi-box-seam"></i></span>
       <?php endif; ?>
@@ -391,7 +391,7 @@ $mailtoLink    = $alertEmail
     <!-- Brand header -->
     <div class="scan-header">
       <?php if ($logoPath): ?>
-        <img src="/asset-manager/<?= $logoPath ?>" alt="<?= $appName ?>" class="scan-logo">
+        <img src="/<?= $logoPath ?>" alt="<?= $appName ?>" class="scan-logo">
       <?php else: ?>
         <span class="scan-logo-placeholder"><i class="bi bi-box-seam"></i></span>
       <?php endif; ?>

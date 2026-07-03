@@ -19,21 +19,21 @@ if ($format === 'json') {
     $rows = $pdo->prepare("SELECT id, asset_tag, name, status FROM assets WHERE asset_tag LIKE ? OR name LIKE ? OR serial_number LIKE ? OR brand LIKE ? OR model LIKE ? LIMIT 5");
     $rows->execute([$like,$like,$like,$like,$like]);
     foreach ($rows->fetchAll() as $r) {
-        $results[] = ['type'=>'asset','id'=>$r['id'],'label'=>$r['asset_tag'].' — '.$r['name'],'sub'=>ucfirst($r['status']),'url'=>'/asset-manager/modules/assets/view.php?id='.$r['id']];
+        $results[] = ['type'=>'asset','id'=>$r['id'],'label'=>$r['asset_tag'].' — '.$r['name'],'sub'=>ucfirst($r['status']),'url'=>'/modules/assets/view.php?id='.$r['id']];
     }
 
     // Users
     $rows = $pdo->prepare("SELECT id, name, email, role FROM users WHERE name LIKE ? OR email LIKE ? LIMIT 3");
     $rows->execute([$like,$like]);
     foreach ($rows->fetchAll() as $r) {
-        $results[] = ['type'=>'user','id'=>$r['id'],'label'=>$r['name'],'sub'=>$r['email'],'url'=>'/asset-manager/modules/users/index.php'];
+        $results[] = ['type'=>'user','id'=>$r['id'],'label'=>$r['name'],'sub'=>$r['email'],'url'=>'/modules/users/index.php'];
     }
 
     // Maintenance
     $rows = $pdo->prepare("SELECT m.id, m.description, m.type, a.name as asset_name FROM maintenance m LEFT JOIN assets a ON m.asset_id=a.id WHERE m.description LIKE ? OR m.technician LIKE ? OR a.name LIKE ? LIMIT 3");
     $rows->execute([$like,$like,$like]);
     foreach ($rows->fetchAll() as $r) {
-        $results[] = ['type'=>'maintenance','id'=>$r['id'],'label'=>substr($r['description'],0,60),'sub'=>$r['asset_name'].' · '.ucfirst($r['type']),'url'=>'/asset-manager/modules/maintenance/index.php'];
+        $results[] = ['type'=>'maintenance','id'=>$r['id'],'label'=>substr($r['description'],0,60),'sub'=>$r['asset_name'].' · '.ucfirst($r['type']),'url'=>'/modules/maintenance/index.php'];
     }
 
     echo json_encode($results);
@@ -112,7 +112,7 @@ $total = count($assets) + count($users) + count($maintenance);
       <thead><tr><th>Tag</th><th>Name</th><th>Brand / Model</th><th>Category</th><th>Department</th><th>Status</th></tr></thead>
       <tbody>
       <?php foreach ($assets as $a): ?>
-      <tr onclick="location.href='/asset-manager/modules/assets/view.php?id=<?= $a['id'] ?>'" style="cursor:pointer">
+      <tr onclick="location.href='/modules/assets/view.php?id=<?= $a['id'] ?>'" style="cursor:pointer">
         <td><code class="text-primary"><?= e($a['asset_tag']) ?></code></td>
         <td><strong><?= e($a['name']) ?></strong><?php if($a['serial_number']): ?><br><span class="text-muted small"><?= e($a['serial_number']) ?></span><?php endif; ?></td>
         <td><?= e(trim(($a['brand']??'').' '.($a['model']??''))) ?: '—' ?></td>
@@ -137,7 +137,7 @@ $total = count($assets) + count($users) + count($maintenance);
       <thead><tr><th>Name</th><th>Email</th><th>Role</th><th>Status</th></tr></thead>
       <tbody>
       <?php foreach ($users as $u): ?>
-      <tr onclick="location.href='/asset-manager/modules/users/index.php'" style="cursor:pointer">
+      <tr onclick="location.href='/modules/users/index.php'" style="cursor:pointer">
         <td><strong><?= e($u['name']) ?></strong></td>
         <td><?= e($u['email']) ?></td>
         <td><span class="badge <?= roleBadgeClass($u['role']) ?>"><?= roleLabel($u['role']) ?></span></td>
@@ -160,7 +160,7 @@ $total = count($assets) + count($users) + count($maintenance);
       <thead><tr><th>Asset</th><th>Type</th><th>Description</th><th>Date</th><th>Technician</th><th>Status</th></tr></thead>
       <tbody>
       <?php foreach ($maintenance as $m): ?>
-      <tr onclick="location.href='/asset-manager/modules/maintenance/index.php'" style="cursor:pointer">
+      <tr onclick="location.href='/modules/maintenance/index.php'" style="cursor:pointer">
         <td><code class="text-primary small"><?= e($m['asset_tag']) ?></code><br><span class="small"><?= e($m['asset_name']) ?></span></td>
         <td><span class="badge bg-secondary"><?= ucfirst($m['type']) ?></span></td>
         <td><?= e(mb_substr($m['description'],0,80)) ?><?= strlen($m['description'])>80?'…':'' ?></td>

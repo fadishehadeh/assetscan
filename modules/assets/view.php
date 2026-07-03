@@ -80,8 +80,8 @@ require_once __DIR__ . '/../../includes/header.php';
     <a href="edit.php?id=<?= $id ?>" class="btn btn-primary btn-sm"><i class="bi bi-pencil me-1"></i>Edit</a>
     <a href="clone.php?id=<?= $id ?>" class="btn btn-outline-secondary btn-sm" onclick="return confirm('Clone this asset? A new asset tag will be assigned.')"><i class="bi bi-copy me-1"></i>Clone</a>
     <a href="qr.php?id=<?= $id ?>" class="btn btn-success btn-sm" target="_blank"><i class="bi bi-qr-code me-1"></i>Print QR</a>
-    <a href="/asset-manager/modules/checkout/checkout.php?asset_id=<?= $id ?>" class="btn btn-outline-primary btn-sm"><i class="bi bi-arrow-left-right me-1"></i>Check Out</a>
-    <a href="/asset-manager/modules/disposal/request.php?asset_id=<?= $id ?>" class="btn btn-outline-danger btn-sm"><i class="bi bi-trash3 me-1"></i>Dispose</a>
+    <a href="/modules/checkout/checkout.php?asset_id=<?= $id ?>" class="btn btn-outline-primary btn-sm"><i class="bi bi-arrow-left-right me-1"></i>Check Out</a>
+    <a href="/modules/disposal/request.php?asset_id=<?= $id ?>" class="btn btn-outline-danger btn-sm"><i class="bi bi-trash3 me-1"></i>Dispose</a>
     <?php endif; ?>
     <a href="index.php" class="btn btn-outline-secondary btn-sm"><i class="bi bi-arrow-left me-1"></i>Back</a>
   </div>
@@ -155,7 +155,7 @@ require_once __DIR__ . '/../../includes/header.php';
       <div class="card-header d-flex justify-content-between align-items-center">
         <span><i class="bi bi-wrench me-2"></i>Maintenance History</span>
         <?php if (isAdmin() || isIT()): ?>
-        <a href="/asset-manager/modules/maintenance/add.php?asset_id=<?= $id ?>" class="btn btn-sm btn-outline-primary">+ Log</a>
+        <a href="/modules/maintenance/add.php?asset_id=<?= $id ?>" class="btn btn-sm btn-outline-primary">+ Log</a>
         <?php endif; ?>
       </div>
       <div class="table-responsive">
@@ -194,7 +194,7 @@ require_once __DIR__ . '/../../includes/header.php';
           <div class="col-4">
             <div class="position-relative">
               <div class="ratio ratio-1x1">
-                <img src="/asset-manager/<?= e($p['file_path']) ?>"
+                <img src="/<?= e($p['file_path']) ?>"
                      class="img-fluid rounded object-fit-cover w-100 h-100"
                      alt="<?= e($p['caption'] ?? 'Asset photo') ?>"
                      style="cursor:pointer; object-fit:cover;"
@@ -260,12 +260,12 @@ require_once __DIR__ . '/../../includes/header.php';
             $icon = $icons[$doc['doc_type']] ?? 'bi-paperclip';
           ?>
           <tr>
-            <td><a href="/asset-manager/<?= e($doc['file_path']) ?>" target="_blank"><i class="bi <?= $icon ?> me-1"></i><?= e($doc['name']) ?></a></td>
+            <td><a href="/<?= e($doc['file_path']) ?>" target="_blank"><i class="bi <?= $icon ?> me-1"></i><?= e($doc['name']) ?></a></td>
             <td><span class="badge bg-light text-dark"><?= ucfirst(str_replace('_',' ',$doc['doc_type'])) ?></span></td>
             <td><?= $doc['file_size'] > 0 ? round($doc['file_size']/1024,1).' KB' : '—' ?></td>
             <td><?= e($doc['uploader'] ?? '—') ?></td>
             <td><?= date('d M Y', strtotime($doc['uploaded_at'])) ?></td>
-            <?php if(isAdmin()):?><td><a href="/asset-manager/modules/documents/delete.php?id=<?= $doc['id'] ?>" class="text-danger small" onclick="return confirm('Delete this document?')"><i class="bi bi-trash3"></i></a></td><?php endif;?>
+            <?php if(isAdmin()):?><td><a href="/modules/documents/delete.php?id=<?= $doc['id'] ?>" class="text-danger small" onclick="return confirm('Delete this document?')"><i class="bi bi-trash3"></i></a></td><?php endif;?>
           </tr>
           <?php endforeach; ?>
           </tbody>
@@ -384,7 +384,7 @@ require_once __DIR__ . '/../../includes/header.php';
 <div class="modal fade" id="uploadDocModal" tabindex="-1">
   <div class="modal-dialog">
     <div class="modal-content">
-      <form method="POST" action="/asset-manager/modules/documents/upload.php" enctype="multipart/form-data">
+      <form method="POST" action="/modules/documents/upload.php" enctype="multipart/form-data">
         <input type="hidden" name="asset_id" value="<?= $id ?>">
         <div class="modal-header"><h5 class="modal-title">Upload Document</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
         <div class="modal-body">
@@ -414,7 +414,7 @@ require_once __DIR__ . '/../../includes/header.php';
         <span class="badge bg-primary">Primary</span>
       </div>
       <div class="card-body p-2">
-        <img src="/asset-manager/<?= e($primaryPhoto['file_path']) ?>"
+        <img src="/<?= e($primaryPhoto['file_path']) ?>"
              alt="<?= e($primaryPhoto['caption'] ?? $a['name']) ?>"
              class="img-fluid rounded w-100"
              style="object-fit:cover;max-height:240px;">
@@ -429,7 +429,7 @@ require_once __DIR__ . '/../../includes/header.php';
       <div class="card-header"><i class="bi bi-qr-code me-2"></i>QR Code</div>
       <div class="card-body">
         <?php if ($a['qr_code_path'] && file_exists(__DIR__ . '/../../' . $a['qr_code_path'])): ?>
-        <img src="/asset-manager/<?= e($a['qr_code_path']) ?>" alt="QR Code" class="img-fluid" style="max-width:180px;">
+        <img src="/<?= e($a['qr_code_path']) ?>" alt="QR Code" class="img-fluid" style="max-width:180px;">
         <?php else: ?>
         <div class="text-muted py-3"><i class="bi bi-qr-code" style="font-size:60px;opacity:.3;"></i><br>QR not generated</div>
         <?php endif; ?>

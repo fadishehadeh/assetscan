@@ -7,7 +7,7 @@ require_once __DIR__ . '/../../includes/functions.php';
 requireLogin();
 if (!isSuperAdmin()) {
     setFlash('danger', 'Access denied. Super Admin role required.');
-    header('Location: /asset-manager/modules/dashboard/index.php');
+    header('Location: /modules/dashboard/index.php');
     exit;
 }
 

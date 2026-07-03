@@ -148,7 +148,7 @@ $_showEol      = in_array('alert_eol', $activeWidgets) && $eolAlert > 0;
     <div class="alert alert-warning d-flex align-items-center gap-2 mb-0">
       <i class="bi bi-shield-exclamation fs-5"></i>
       <div><strong><?= $warrantyAlert ?></strong> asset<?= $warrantyAlert > 1 ? 's' : '' ?> with warranty expiring within 30 days.
-        <a href="/asset-manager/modules/reports/warranty.php" class="alert-link">View</a>
+        <a href="/modules/reports/warranty.php" class="alert-link">View</a>
       </div>
     </div>
   </div>
@@ -158,7 +158,7 @@ $_showEol      = in_array('alert_eol', $activeWidgets) && $eolAlert > 0;
     <div class="alert alert-danger d-flex align-items-center gap-2 mb-0">
       <i class="bi bi-exclamation-triangle fs-5"></i>
       <div><strong><?= $eolAlert ?></strong> asset<?= $eolAlert > 1 ? 's' : '' ?> past end-of-life.
-        <a href="/asset-manager/modules/reports/eol.php" class="alert-link">View</a>
+        <a href="/modules/reports/eol.php" class="alert-link">View</a>
       </div>
     </div>
   </div>
@@ -174,7 +174,7 @@ $_showEol      = in_array('alert_eol', $activeWidgets) && $eolAlert > 0;
     <div class="card">
       <div class="card-header d-flex justify-content-between align-items-center py-3">
         <span class="fw-semibold"><i class="bi bi-clock-history me-2"></i>Recent Assets</span>
-        <a href="/asset-manager/modules/assets/index.php" class="btn btn-sm btn-outline-primary">View All</a>
+        <a href="/modules/assets/index.php" class="btn btn-sm btn-outline-primary">View All</a>
       </div>
       <div class="table-responsive">
         <table class="table table-hover mb-0">
@@ -197,7 +197,7 @@ $_showEol      = in_array('alert_eol', $activeWidgets) && $eolAlert > 0;
               <td><?= statusBadge($a['status']) ?></td>
               <td><?= e($a['assigned_name'] ?? '—') ?></td>
               <td>
-                <a href="/asset-manager/modules/assets/view.php?id=<?= $a['id'] ?>" class="btn btn-xs btn-outline-secondary btn-sm py-0 px-2">
+                <a href="/modules/assets/view.php?id=<?= $a['id'] ?>" class="btn btn-xs btn-outline-secondary btn-sm py-0 px-2">
                   <i class="bi bi-eye"></i>
                 </a>
               </td>
@@ -244,18 +244,18 @@ $_showEol      = in_array('alert_eol', $activeWidgets) && $eolAlert > 0;
       </div>
       <div class="card-body d-grid gap-2">
         <?php if (isAdmin() || isIT()): ?>
-        <a href="/asset-manager/modules/assets/add.php" class="btn btn-primary btn-sm">
+        <a href="/modules/assets/add.php" class="btn btn-primary btn-sm">
           <i class="bi bi-plus-circle me-1"></i> Add New Asset
         </a>
         <?php endif; ?>
-        <a href="/asset-manager/modules/reports/index.php" class="btn btn-outline-secondary btn-sm">
+        <a href="/modules/reports/index.php" class="btn btn-outline-secondary btn-sm">
           <i class="bi bi-file-earmark-bar-graph me-1"></i> Generate Report
         </a>
-        <a href="/asset-manager/modules/assets/index.php?status=under_maintenance" class="btn btn-outline-warning btn-sm">
+        <a href="/modules/assets/index.php?status=under_maintenance" class="btn btn-outline-warning btn-sm">
           <i class="bi bi-wrench me-1"></i> View Maintenance Queue
         </a>
         <?php if (isAdmin()): ?>
-        <a href="/asset-manager/modules/depreciation/run.php" class="btn btn-outline-info btn-sm">
+        <a href="/modules/depreciation/run.php" class="btn btn-outline-info btn-sm">
           <i class="bi bi-graph-down me-1"></i> Run Depreciation Calc
         </a>
         <?php endif; ?>
@@ -346,7 +346,7 @@ const _defaultWidgetKeys = <?= json_encode(array_keys($_allWidgetLabels)) ?>;
 
 function saveDashboardWidgets() {
   const checked = [...document.querySelectorAll('.widget-toggle:checked')].map(el => el.value);
-  fetch('/asset-manager/modules/dashboard/widgets.php', {
+  fetch('/modules/dashboard/widgets.php', {
     method: 'POST',
     headers: {'Content-Type':'application/x-www-form-urlencoded'},
     body: 'action=save&widgets=' + encodeURIComponent(JSON.stringify(checked))

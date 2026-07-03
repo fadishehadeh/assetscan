@@ -6,7 +6,7 @@ require_once __DIR__ . '/../../includes/functions.php';
 requireLogin();
 if (!isAdmin() && !isIT()) {
     setFlash('danger', 'Access denied.');
-    header('Location: /asset-manager/index.php');
+    header('Location: /index.php');
     exit;
 }
 
@@ -60,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             $pdo->commit();
             setFlash('success', 'Asset checked out successfully.');
-            header("Location: /asset-manager/modules/assets/view.php?id={$assetId}");
+            header("Location: /modules/assets/view.php?id={$assetId}");
             exit;
         } catch (Throwable $e) {
             $pdo->rollBack();

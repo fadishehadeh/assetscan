@@ -47,7 +47,7 @@ $assets = $pdo->query(
         <?php foreach ($assets as $a): ?>
         <tr>
           <td><code class="text-danger"><?= e($a['asset_tag']) ?></code></td>
-          <td><a href="/asset-manager/modules/assets/view.php?id=<?= $a['id'] ?>" class="fw-semibold text-dark text-decoration-none"><?= e($a['name']) ?></a></td>
+          <td><a href="/modules/assets/view.php?id=<?= $a['id'] ?>" class="fw-semibold text-dark text-decoration-none"><?= e($a['name']) ?></a></td>
           <td><span class="badge bg-light text-dark"><?= e($a['cat_name'] ?? '—') ?></span></td>
           <td><?= e($a['dept_name'] ?? '—') ?></td>
           <td><?= $a['purchase_date'] ? date('d M Y', strtotime($a['purchase_date'])) : '—' ?></td>
@@ -56,7 +56,7 @@ $assets = $pdo->query(
           <td><?= formatMoney((float)$a['purchase_cost'], $currency) ?></td>
           <td><?= e($a['assigned_name'] ?? '—') ?></td>
           <td>
-            <a href="/asset-manager/modules/assets/edit.php?id=<?= $a['id'] ?>" class="btn btn-sm btn-outline-warning py-0 px-2">
+            <a href="/modules/assets/edit.php?id=<?= $a['id'] ?>" class="btn btn-sm btn-outline-warning py-0 px-2">
               <i class="bi bi-pencil"></i>
             </a>
           </td>

@@ -27,7 +27,7 @@ $records  = $pdo->query(
         <?php foreach ($records as $m): ?>
         <tr>
           <td>
-            <a href="/asset-manager/modules/assets/view.php?id=<?= $m['asset_id'] ?>" class="text-dark fw-semibold text-decoration-none"><?= e($m['asset_name']) ?></a>
+            <a href="/modules/assets/view.php?id=<?= $m['asset_id'] ?>" class="text-dark fw-semibold text-decoration-none"><?= e($m['asset_name']) ?></a>
             <br><code class="small text-muted"><?= e($m['asset_tag']) ?></code>
           </td>
           <td><span class="badge bg-secondary"><?= ucfirst($m['type']) ?></span></td>

@@ -419,7 +419,7 @@ $primaryDk = darkenHex($primaryClr);
 
 <!-- Top bar -->
 <div id="topBar">
-  <a href="/asset-manager/modules/assets/index.php" class="back-btn" title="Back">
+  <a href="/modules/assets/index.php" class="back-btn" title="Back">
     <i class="bi bi-arrow-left"></i>
   </a>
   <h1>Scan Asset</h1>
@@ -550,7 +550,7 @@ $primaryDk = darkenHex($primaryClr);
     if (!tag) { scanPause = false; return; }
     showSpinner(true);
     try {
-      const res  = await fetch('/asset-manager/modules/assets/scan_lookup.php?tag=' + encodeURIComponent(tag));
+      const res  = await fetch('/modules/assets/scan_lookup.php?tag=' + encodeURIComponent(tag));
       const data = await res.json();
       showSpinner(false);
 
@@ -618,7 +618,7 @@ $primaryDk = darkenHex($primaryClr);
   window.lookupFromError = function () {
     const tag = document.getElementById('errorManualInput').value.trim();
     if (!tag) return;
-    window.location.href = '/asset-manager/modules/assets/index.php?search=' + encodeURIComponent(tag);
+    window.location.href = '/modules/assets/index.php?search=' + encodeURIComponent(tag);
   };
 
   manualInput.addEventListener('keydown', (e) => {

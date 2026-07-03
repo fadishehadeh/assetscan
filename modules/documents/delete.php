@@ -6,7 +6,7 @@ require_once __DIR__ . '/../../includes/functions.php';
 requireLogin();
 if (!isAdmin()) {
     setFlash('danger', 'Access denied. Admin role required.');
-    header('Location: /asset-manager/modules/dashboard/index.php');
+    header('Location: /modules/dashboard/index.php');
     exit;
 }
 
@@ -17,12 +17,12 @@ $doc = $st->fetch();
 
 if (!$doc) {
     setFlash('danger', 'Document not found.');
-    header('Location: /asset-manager/modules/assets/index.php');
+    header('Location: /modules/assets/index.php');
     exit;
 }
 
 $assetId      = (int)$doc['asset_id'];
-$redirectBase = "/asset-manager/modules/assets/view.php?id={$assetId}#documents";
+$redirectBase = "/modules/assets/view.php?id={$assetId}#documents";
 
 // Delete physical file
 $filePath = __DIR__ . '/../../' . ltrim($doc['file_path'], '/');

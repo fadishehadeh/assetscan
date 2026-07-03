@@ -34,7 +34,7 @@ function renderAlertsSettings(PDO $pdo, array $s): void
     <span class="fw-semibold"><i class="bi bi-bell me-2 text-warning"></i>Alert Settings</span>
   </div>
   <div class="card-body">
-    <form method="post" action="/asset-manager/modules/settings/index.php?tab=email">
+    <form method="post" action="/modules/settings/index.php?tab=email">
       <input type="hidden" name="_action" value="save_alerts">
 
       <div class="mb-3">

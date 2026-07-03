@@ -6,7 +6,7 @@ require_once __DIR__ . '/../../includes/functions.php';
 requireLogin();
 if (!isAdmin() && !isIT()) {
     setFlash('danger', 'Access denied.');
-    header('Location: /asset-manager/index.php');
+    header('Location: /index.php');
     exit;
 }
 
@@ -97,7 +97,7 @@ require_once __DIR__ . '/../../includes/header.php';
                         $overdue = $co['expected_return'] && strtotime($co['expected_return']) < time();
                     ?>
                     <tr class="<?= $overdue ? 'table-danger' : '' ?>">
-                        <td><a href="/asset-manager/modules/assets/view.php?id=<?= $co['asset_id'] ?>"><?= e($co['asset_tag']) ?></a></td>
+                        <td><a href="/modules/assets/view.php?id=<?= $co['asset_id'] ?>"><?= e($co['asset_tag']) ?></a></td>
                         <td><?= e($co['asset_name']) ?></td>
                         <td><?= e($co['checked_out_to']) ?></td>
                         <td><?= e($co['checked_out_by']) ?></td>

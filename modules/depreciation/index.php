@@ -48,7 +48,7 @@ $assets = $pdo->query(
         ?>
         <tr>
           <td>
-            <a href="/asset-manager/modules/assets/view.php?id=<?= $a['id'] ?>" class="text-dark fw-semibold text-decoration-none">
+            <a href="/modules/assets/view.php?id=<?= $a['id'] ?>" class="text-dark fw-semibold text-decoration-none">
               <?= e($a['name']) ?>
             </a><br>
             <code class="small text-muted"><?= e($a['asset_tag']) ?></code>

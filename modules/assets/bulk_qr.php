@@ -67,7 +67,7 @@ unset($a);
 <div class="no-print">
   <strong style="font-size:14px;">🖨 Bulk QR Print</strong>
   <button onclick="window.print()">Print All Labels</button>
-  <a href="/asset-manager/modules/assets/index.php">← Back to Assets</a>
+  <a href="/modules/assets/index.php">← Back to Assets</a>
   <span class="count"><?= count($assets) ?> labels</span>
 </div>
 
@@ -84,7 +84,7 @@ unset($a);
     <div class="tag"><?= e($a['asset_tag']) ?></div>
     <div class="asset-name"><?= e(mb_strimwidth($a['name'], 0, 40, '…')) ?></div>
     <?php if ($a['qr_code_path'] && file_exists(__DIR__ . '/../../' . $a['qr_code_path'])): ?>
-    <img src="/asset-manager/<?= e($a['qr_code_path']) ?>" alt="QR">
+    <img src="/<?= e($a['qr_code_path']) ?>" alt="QR">
     <?php else: ?>
     <div style="width:110px;height:110px;background:#f1f5f9;margin:0 auto 6px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:10px;color:#94a3b8;">No QR</div>
     <?php endif; ?>

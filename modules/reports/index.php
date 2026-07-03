@@ -119,7 +119,7 @@ $warranty30 = $pdo->query("SELECT a.*, c.name AS cat_name FROM assets a LEFT JOI
             <?php foreach ($eolAssets as $a): ?>
             <tr>
               <td><code><?= e($a['asset_tag']) ?></code></td>
-              <td><a href="/asset-manager/modules/assets/view.php?id=<?= $a['id'] ?>"><?= e($a['name']) ?></a></td>
+              <td><a href="/modules/assets/view.php?id=<?= $a['id'] ?>"><?= e($a['name']) ?></a></td>
               <td><?= e($a['cat_name'] ?? '—') ?></td>
               <td><?= $a['purchase_date'] ? date('d M Y', strtotime($a['purchase_date'])) : '—' ?></td>
               <td><?= $a['useful_life_years'] ?> years</td>
@@ -144,7 +144,7 @@ $warranty30 = $pdo->query("SELECT a.*, c.name AS cat_name FROM assets a LEFT JOI
             <?php foreach ($warranty30 as $a): ?>
             <tr>
               <td><code><?= e($a['asset_tag']) ?></code></td>
-              <td><a href="/asset-manager/modules/assets/view.php?id=<?= $a['id'] ?>"><?= e($a['name']) ?></a></td>
+              <td><a href="/modules/assets/view.php?id=<?= $a['id'] ?>"><?= e($a['name']) ?></a></td>
               <td><?= e($a['cat_name'] ?? '—') ?></td>
               <td class="text-danger fw-bold"><?= date('d M Y', strtotime($a['warranty_expiry'])) ?></td>
             </tr>
