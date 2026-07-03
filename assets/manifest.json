@@ -1,0 +1,28 @@
+{
+  "name": "Asset Manager",
+  "short_name": "Assets",
+  "description": "G2 Asset Management System",
+  "start_url": "/asset-manager/modules/dashboard/index.php",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#0f1117",
+  "theme_color": "#E84B37",
+  "lang": "en",
+  "scope": "/asset-manager/",
+  "icons": [
+    {
+      "src": "/asset-manager/assets/img/logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/asset-manager/assets/img/logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["business", "productivity"],
+  "screenshots": []
+}

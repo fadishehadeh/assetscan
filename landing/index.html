@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AssetScan — Smart Asset Management for Modern Teams</title>
+  <meta name="description" content="Track, manage, and optimize your company assets with AssetScan. QR scanning, maintenance scheduling, depreciation tracking and more.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+  <style>
+    :root {
+      --brand:    #E84B37;
+      --brand-dk: #c73d2b;
+      --brand-lt: #fff0ee;
+      --dark:     #0f172a;
+      --dark2:    #1e293b;
+      --mid:      #475569;
+      --light:    #f8fafc;
+      --border:   #e2e8f0;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--dark);
+      background: #fff;
+      overflow-x: hidden;
+    }
+
+    /* ── NAVBAR ── */
+    .navbar {
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    .navbar-brand {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--dark) !important;
+      letter-spacing: -0.5px;
+    }
+    .navbar-brand span { color: var(--brand); }
+    .nav-link {
+      color: var(--mid) !important;
+      font-weight: 500;
+      font-size: .9rem;
+      transition: color .2s;
+    }
+    .nav-link:hover { color: var(--brand) !important; }
+    .btn-brand {
+      background: var(--brand);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      padding: 9px 22px;
+      font-size: .9rem;
+      transition: background .2s, transform .15s;
+    }
+    .btn-brand:hover { background: var(--brand-dk); color: #fff; transform: translateY(-1px); }
+    .btn-brand-outline {
+      border: 2px solid var(--brand);
+      color: var(--brand);
+      border-radius: 8px;
+      font-weight: 600;
+      padding: 9px 22px;
+      font-size: .9rem;
+      background: transparent;
+      transition: all .2s;
+    }
+    .btn-brand-outline:hover { background: var(--brand); color: #fff; }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 60%, #2d1a16 100%);
+      min-height: 92vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      padding: 80px 0;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      width: 700px; height: 700px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(232,75,55,.18) 0%, transparent 70%);
+      top: -200px; right: -150px;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      width: 400px; height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(232,75,55,.1) 0%, transparent 70%);
+      bottom: -100px; left: -100px;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(232,75,55,.15);
+      border: 1px solid rgba(232,75,55,.3);
+      color: #fca99b;
+      border-radius: 50px;
+      padding: 6px 16px;
+      font-size: .8rem;
+      font-weight: 600;
+      letter-spacing: .5px;
+      margin-bottom: 28px;
+    }
+    .hero h1 {
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.1;
+      letter-spacing: -1.5px;
+      margin-bottom: 24px;
+    }
+    .hero h1 span {
+      color: var(--brand);
+      position: relative;
+    }
+    .hero p.lead {
+      color: #94a3b8;
+      font-size: 1.15rem;
+      line-height: 1.7;
+      max-width: 520px;
+      margin-bottom: 40px;
+    }
+    .hero-cta { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn-hero {
+      background: var(--brand);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-weight: 700;
+      padding: 14px 30px;
+      font-size: 1rem;
+      transition: all .2s;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-hero:hover { background: var(--brand-dk); color: #fff; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(232,75,55,.35); }
+    .btn-hero-ghost {
+      background: rgba(255,255,255,.08);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 10px;
+      font-weight: 600;
+      padding: 14px 28px;
+      font-size: 1rem;
+      transition: all .2s;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-hero-ghost:hover { background: rgba(255,255,255,.15); color: #fff; }
+
+    /* Hero mockup */
+    .hero-mockup {
+      background: #1e293b;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.1);
+      overflow: hidden;
+      box-shadow: 0 40px 80px rgba(0,0,0,.5);
+      position: relative;
+      z-index: 1;
+    }
+    .mockup-bar {
+      background: #0f172a;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+    .mockup-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .mockup-url {
+      flex: 1;
+      background: rgba(255,255,255,.06);
+      border-radius: 6px;
+      padding: 4px 12px;
+      font-size: .75rem;
+      color: #64748b;
+      margin: 0 8px;
+    }
+    .mockup-body { padding: 20px; }
+    .mockup-stat-row { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; margin-bottom: 16px; }
+    .mockup-stat {
+      background: rgba(255,255,255,.05);
+      border-radius: 10px;
+      padding: 12px;
+      border: 1px solid rgba(255,255,255,.06);
+    }
+    .mockup-stat-val { font-size: 1.3rem; font-weight: 700; color: #fff; }
+    .mockup-stat-lbl { font-size: .65rem; color: #64748b; margin-top: 2px; }
+    .mockup-stat-icon { font-size: 1rem; margin-bottom: 4px; }
+    .mockup-table-row {
+      display: grid;
+      grid-template-columns: 2fr 1.5fr 1fr 1fr;
+      gap: 10px;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255,255,255,.04);
+      font-size: .72rem;
+      color: #94a3b8;
+      align-items: center;
+    }
+    .mockup-table-row.head { color: #475569; font-size: .65rem; text-transform: uppercase; letter-spacing: .5px; }
+    .mockup-badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 50px;
+      font-size: .65rem;
+      font-weight: 600;
+    }
+    .badge-active { background: rgba(34,197,94,.15); color: #4ade80; }
+    .badge-maint  { background: rgba(234,179,8,.15); color: #fbbf24; }
+    .badge-eol    { background: rgba(232,75,55,.15); color: #fca99b; }
+
+    /* ── STATS STRIP ── */
+    .stats-strip {
+      background: var(--dark);
+      padding: 48px 0;
+    }
+    .stat-item { text-align: center; }
+    .stat-num {
+      font-size: 2.4rem;
+      font-weight: 900;
+      color: var(--brand);
+      letter-spacing: -1px;
+      line-height: 1;
+    }
+    .stat-lbl { color: #64748b; font-size: .85rem; margin-top: 6px; }
+
+    /* ── SECTION SHARED ── */
+    section { padding: 100px 0; }
+    .section-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--brand-lt);
+      color: var(--brand);
+      border-radius: 50px;
+      padding: 5px 14px;
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: .5px;
+      margin-bottom: 16px;
+    }
+    .section-title {
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      font-weight: 800;
+      letter-spacing: -1px;
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+    .section-sub { color: var(--mid); font-size: 1.05rem; line-height: 1.7; max-width: 540px; }
+
+    /* ── FEATURES ── */
+    .features { background: var(--light); }
+    .feature-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 32px 28px;
+      border: 1px solid var(--border);
+      height: 100%;
+      transition: all .25s;
+      position: relative;
+      overflow: hidden;
+    }
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--brand);
+      transform: scaleX(0);
+      transition: transform .25s;
+      transform-origin: left;
+    }
+    .feature-card:hover { box-shadow: 0 12px 40px rgba(0,0,0,.08); transform: translateY(-4px); }
+    .feature-card:hover::before { transform: scaleX(1); }
+    .feature-icon {
+      width: 52px; height: 52px;
+      background: var(--brand-lt);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      color: var(--brand);
+      margin-bottom: 20px;
+    }
+    .feature-card h5 { font-size: 1rem; font-weight: 700; margin-bottom: 10px; }
+    .feature-card p { color: var(--mid); font-size: .88rem; line-height: 1.65; margin: 0; }
+
+    /* ── HOW IT WORKS ── */
+    .how-it-works { background: #fff; }
+    .step-num {
+      width: 48px; height: 48px;
+      background: var(--brand);
+      color: #fff;
+      border-radius: 50%;
+      font-size: 1.1rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      flex-shrink: 0;
+    }
+    .step-connector {
+      position: absolute;
+      top: 24px;
+      left: calc(50% + 40px);
+      right: calc(-50% + 40px);
+      height: 2px;
+      background: var(--border);
+    }
+    .step-wrap { position: relative; }
+    .step-card { text-align: center; padding: 0 20px; }
+    .step-card h5 { font-weight: 700; font-size: 1rem; margin-bottom: 10px; }
+    .step-card p { color: var(--mid); font-size: .88rem; line-height: 1.65; }
+
+    /* ── WHO IT'S FOR ── */
+    .audience { background: var(--light); }
+    .audience-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 36px 30px;
+      border: 1px solid var(--border);
+      text-align: center;
+      height: 100%;
+      transition: all .25s;
+    }
+    .audience-card:hover { box-shadow: 0 12px 40px rgba(0,0,0,.08); transform: translateY(-4px); }
+    .audience-icon {
+      width: 64px; height: 64px;
+      background: var(--brand-lt);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      color: var(--brand);
+      margin: 0 auto 20px;
+    }
+    .audience-card h5 { font-weight: 700; margin-bottom: 10px; }
+    .audience-card p { color: var(--mid); font-size: .88rem; line-height: 1.65; margin: 0; }
+
+    /* ── FEATURE HIGHLIGHT ── */
+    .highlight { background: #fff; }
+    .highlight-img {
+      background: var(--light);
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+    .highlight-feature {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+    .highlight-feature-icon {
+      width: 40px; height: 40px;
+      background: var(--brand-lt);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--brand);
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+    .highlight-feature h6 { font-weight: 700; margin-bottom: 4px; font-size: .95rem; }
+    .highlight-feature p { color: var(--mid); font-size: .85rem; line-height: 1.6; margin: 0; }
+
+    /* ── DEMO MOCKUP PANELS ── */
+    .panel-mockup {
+      background: var(--dark);
+      border-radius: 16px;
+      padding: 24px;
+      color: #fff;
+    }
+    .panel-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255,255,255,.06);
+      font-size: .82rem;
+      color: #94a3b8;
+    }
+    .panel-row:last-child { border: none; }
+    .panel-label { color: #475569; font-size: .7rem; text-transform: uppercase; letter-spacing: .5px; margin-bottom: 12px; }
+
+    /* ── TESTIMONIALS / SOCIAL PROOF ── */
+    .proof { background: var(--dark); padding: 80px 0; }
+    .proof-title { color: #fff; font-size: 1.8rem; font-weight: 800; letter-spacing: -.5px; }
+    .proof-sub { color: #64748b; }
+    .proof-card {
+      background: #1e293b;
+      border-radius: 14px;
+      padding: 28px;
+      border: 1px solid rgba(255,255,255,.06);
+      height: 100%;
+    }
+    .proof-stars { color: #fbbf24; font-size: .9rem; margin-bottom: 14px; }
+    .proof-text { color: #cbd5e1; font-size: .9rem; line-height: 1.7; margin-bottom: 20px; font-style: italic; }
+    .proof-author { color: #fff; font-weight: 600; font-size: .85rem; }
+    .proof-role { color: #64748b; font-size: .78rem; }
+
+    /* ── FORM SECTION ── */
+    .demo-form { background: var(--light); }
+    .form-card {
+      background: #fff;
+      border-radius: 20px;
+      padding: 52px 48px;
+      border: 1px solid var(--border);
+      box-shadow: 0 20px 60px rgba(0,0,0,.06);
+    }
+    .form-label { font-weight: 600; font-size: .85rem; color: var(--dark2); }
+    .form-control, .form-select {
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      padding: 11px 16px;
+      font-size: .9rem;
+      transition: border-color .2s, box-shadow .2s;
+    }
+    .form-control:focus, .form-select:focus {
+      border-color: var(--brand);
+      box-shadow: 0 0 0 3px rgba(232,75,55,.12);
+      outline: none;
+    }
+    .btn-submit {
+      background: var(--brand);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      padding: 13px 32px;
+      font-weight: 700;
+      font-size: 1rem;
+      width: 100%;
+      transition: all .2s;
+    }
+    .btn-submit:hover { background: var(--brand-dk); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(232,75,55,.3); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--dark);
+      color: #64748b;
+      padding: 60px 0 30px;
+    }
+    .footer-brand { font-size: 1.3rem; font-weight: 800; color: #fff; letter-spacing: -.5px; margin-bottom: 10px; }
+    .footer-brand span { color: var(--brand); }
+    .footer-desc { font-size: .85rem; line-height: 1.7; max-width: 260px; }
+    .footer-heading { color: #fff; font-weight: 700; font-size: .85rem; margin-bottom: 16px; text-transform: uppercase; letter-spacing: .5px; }
+    .footer-link { color: #64748b; text-decoration: none; font-size: .85rem; display: block; margin-bottom: 8px; transition: color .2s; }
+    .footer-link:hover { color: var(--brand); }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,.06); margin-top: 40px; padding-top: 24px; font-size: .8rem; }
+    .footer-social a {
+      width: 36px; height: 36px;
+      background: rgba(255,255,255,.06);
+      border-radius: 8px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #64748b;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: all .2s;
+      margin-right: 6px;
+    }
+    .footer-social a:hover { background: var(--brand); color: #fff; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      section { padding: 64px 0; }
+      .hero { min-height: auto; padding: 60px 0; }
+      .form-card { padding: 32px 24px; }
+      .step-connector { display: none; }
+      .mockup-stat-row { grid-template-columns: repeat(2,1fr); }
+      .mockup-table-row { grid-template-columns: 2fr 1fr; }
+      .mockup-table-row > *:nth-child(3),
+      .mockup-table-row > *:nth-child(4) { display: none; }
+    }
+
+    /* AOS overrides */
+    [data-aos] { pointer-events: none; }
+    [data-aos].aos-animate { pointer-events: auto; }
+  </style>
+</head>
+<body>
+
+<!-- ── NAVBAR ──────────────────────────────────────────────────────────── -->
+<nav class="navbar navbar-expand-lg">
+  <div class="container">
+    <a class="navbar-brand" href="#">Asset<span>Scan</span></a>
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav mx-auto gap-1">
+        <li class="nav-item"><a class="nav-link px-3" href="#features">Features</a></li>
+        <li class="nav-item"><a class="nav-link px-3" href="#how-it-works">How It Works</a></li>
+        <li class="nav-item"><a class="nav-link px-3" href="#who">Who It's For</a></li>
+        <li class="nav-item"><a class="nav-link px-3" href="#demo">Request Demo</a></li>
+      </ul>
+      <div class="d-flex gap-2 mt-3 mt-lg-0">
+        <a href="/asset-manager/modules/dashboard/index.php" class="btn-brand-outline text-decoration-none">Log In</a>
+        <a href="#demo" class="btn-brand text-decoration-none">Get Started</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ── HERO ────────────────────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="container position-relative" style="z-index:1;">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6" data-aos="fade-right" data-aos-duration="700">
+        <div class="hero-badge">
+          <i class="bi bi-qr-code-scan"></i> SMART ASSET MANAGEMENT
+        </div>
+        <h1>Track Every Asset.<br><span>From Scan to Disposal.</span></h1>
+        <p class="lead">AssetScan gives your team full visibility over company assets — from the moment they arrive to the day they're retired. QR scanning, maintenance alerts, and executive reporting, all in one place.</p>
+        <div class="hero-cta">
+          <a href="#demo" class="btn-hero">
+            <i class="bi bi-calendar-check"></i> Request a Demo
+          </a>
+          <a href="#features" class="btn-hero-ghost">
+            <i class="bi bi-play-circle"></i> See Features
+          </a>
+        </div>
+      </div>
+      <div class="col-lg-6" data-aos="fade-left" data-aos-duration="700" data-aos-delay="150">
+        <div class="hero-mockup">
+          <div class="mockup-bar">
+            <div class="mockup-dot" style="background:#ef4444;"></div>
+            <div class="mockup-dot" style="background:#f59e0b;"></div>
+            <div class="mockup-dot" style="background:#22c55e;"></div>
+            <div class="mockup-url">app.assetscan.online / dashboard</div>
+          </div>
+          <div class="mockup-body">
+            <div style="color:#64748b; font-size:.7rem; text-transform:uppercase; letter-spacing:.5px; margin-bottom:12px;">Overview</div>
+            <div class="mockup-stat-row">
+              <div class="mockup-stat">
+                <div class="mockup-stat-icon">📦</div>
+                <div class="mockup-stat-val">1,248</div>
+                <div class="mockup-stat-lbl">Total Assets</div>
+              </div>
+              <div class="mockup-stat">
+                <div class="mockup-stat-icon" style="color:#22c55e;">✓</div>
+                <div class="mockup-stat-val" style="color:#4ade80;">1,102</div>
+                <div class="mockup-stat-lbl">Active</div>
+              </div>
+              <div class="mockup-stat">
+                <div class="mockup-stat-icon">🔧</div>
+                <div class="mockup-stat-val" style="color:#fbbf24;">34</div>
+                <div class="mockup-stat-lbl">In Maintenance</div>
+              </div>
+              <div class="mockup-stat">
+                <div class="mockup-stat-icon">💰</div>
+                <div class="mockup-stat-val" style="color:#60a5fa;">$2.4M</div>
+                <div class="mockup-stat-lbl">Total Value</div>
+              </div>
+            </div>
+            <div class="mockup-table-row head">
+              <span>Asset</span><span>Department</span><span>Status</span><span>Value</span>
+            </div>
+            <div class="mockup-table-row">
+              <span style="color:#e2e8f0; font-weight:500;">MacBook Pro 16"</span>
+              <span>Engineering</span>
+              <span><span class="mockup-badge badge-active">Active</span></span>
+              <span style="color:#e2e8f0;">$2,499</span>
+            </div>
+            <div class="mockup-table-row">
+              <span style="color:#e2e8f0; font-weight:500;">Cisco Switch 48P</span>
+              <span>IT Dept</span>
+              <span><span class="mockup-badge badge-maint">Maint.</span></span>
+              <span style="color:#e2e8f0;">$3,200</span>
+            </div>
+            <div class="mockup-table-row">
+              <span style="color:#e2e8f0; font-weight:500;">HP LaserJet 9015</span>
+              <span>Finance</span>
+              <span><span class="mockup-badge badge-active">Active</span></span>
+              <span style="color:#e2e8f0;">$890</span>
+            </div>
+            <div class="mockup-table-row">
+              <span style="color:#e2e8f0; font-weight:500;">Dell OptiPlex 7090</span>
+              <span>HR</span>
+              <span><span class="mockup-badge badge-eol">EOL</span></span>
+              <span style="color:#e2e8f0;">$420</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── STATS STRIP ──────────────────────────────────────────────────────── -->
+<div class="stats-strip">
+  <div class="container">
+    <div class="row g-4 text-center">
+      <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="0">
+        <div class="stat-item">
+          <div class="stat-num">10K+</div>
+          <div class="stat-lbl">Assets Tracked</div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="100">
+        <div class="stat-item">
+          <div class="stat-num">500+</div>
+          <div class="stat-lbl">Companies</div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="200">
+        <div class="stat-item">
+          <div class="stat-num">99.9%</div>
+          <div class="stat-lbl">Uptime</div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="300">
+        <div class="stat-item">
+          <div class="stat-num">30%</div>
+          <div class="stat-lbl">Cost Savings Avg.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── FEATURES ────────────────────────────────────────────────────────── -->
+<section class="features" id="features">
+  <div class="container">
+    <div class="text-center mb-5" data-aos="fade-up">
+      <div class="section-tag"><i class="bi bi-stars"></i> EVERYTHING YOU NEED</div>
+      <h2 class="section-title">Powerful features.<br>Simple to use.</h2>
+      <p class="section-sub mx-auto">From small offices to large enterprises — AssetScan scales with your needs and keeps your team in control.</p>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="0">
+        <div class="feature-card">
+          <div class="feature-icon"><i class="bi bi-qr-code-scan"></i></div>
+          <h5>QR & Barcode Scanning</h5>
+          <p>Scan any asset instantly using your phone camera. Auto-generates QR labels for every asset. Works on iOS and Android without any app install.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="80">
+        <div class="feature-card">
+          <div class="feature-icon"><i class="bi bi-wrench-adjustable"></i></div>
+          <h5>Maintenance Scheduling</h5>
+          <p>Schedule recurring maintenance, get email alerts before due dates, and log all service history against each asset automatically.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="160">
+        <div class="feature-card">
+          <div class="feature-icon"><i class="bi bi-graph-down-arrow"></i></div>
+          <h5>Depreciation Tracking</h5>
+          <p>Straight-line or reducing balance depreciation calculated automatically. Always know the current book value of every asset you own.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="0">
+        <div class="feature-card">
+          <div class="feature-icon"><i class="bi bi-arrow-left-right"></i></div>
+          <h5>Checkout & Transfers</h5>
+          <p>Assign assets to employees, track who has what, and log transfers between departments or locations with a full audit trail.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="80">
+        <div class="feature-card">
+          <div class="feature-icon"><i class="bi bi-graph-up-arrow"></i></div>
+          <h5>Executive Dashboard</h5>
+          <p>KPI cards, trend charts, department comparisons, and one-click PDF export built for management reporting and board presentations.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="160">
+        <div class="feature-card">
+          <div class="feature-icon"><i class="bi bi-bell"></i></div>
+          <h5>Smart Alerts</h5>
+          <p>Email notifications for warranty expiry, end-of-life, overdue maintenance, and pending approvals. Never miss a critical deadline again.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="0">
+        <div class="feature-card">
+          <div class="feature-icon"><i class="bi bi-file-earmark-arrow-up"></i></div>
+          <h5>Bulk CSV Import</h5>
+          <p>Migrate from spreadsheets in minutes. Upload thousands of assets at once with our smart CSV importer with field mapping and validation.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="80">
+        <div class="feature-card">
+          <div class="feature-icon"><i class="bi bi-trash3"></i></div>
+          <h5>Disposal Workflow</h5>
+          <p>Formal disposal requests, admin approvals, and automatic status updates. Keep a clean record of every retired asset for auditing purposes.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="160">
+        <div class="feature-card">
+          <div class="feature-icon"><i class="bi bi-phone"></i></div>
+          <h5>Mobile-First & PWA</h5>
+          <p>Install AssetScan on any device like a native app. Full functionality on mobile — scan, update, and manage assets from anywhere on the floor.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── HOW IT WORKS ─────────────────────────────────────────────────────── -->
+<section class="how-it-works" id="how-it-works">
+  <div class="container">
+    <div class="text-center mb-5" data-aos="fade-up">
+      <div class="section-tag"><i class="bi bi-map"></i> SIMPLE PROCESS</div>
+      <h2 class="section-title">Up and running<br>in 3 steps.</h2>
+      <p class="section-sub mx-auto">No lengthy onboarding. No IT consultant required. Get your assets tracked in less than a day.</p>
+    </div>
+    <div class="row g-4 justify-content-center">
+      <div class="col-md-4" data-aos="fade-up" data-aos-delay="0">
+        <div class="step-card">
+          <div class="step-num">1</div>
+          <h5>Import or Add Assets</h5>
+          <p>Upload your existing spreadsheet via CSV bulk import, or add assets one by one. Set categories, locations, and departments right away.</p>
+        </div>
+      </div>
+      <div class="col-md-4" data-aos="fade-up" data-aos-delay="120">
+        <div class="step-card">
+          <div class="step-num">2</div>
+          <h5>Print & Attach QR Labels</h5>
+          <p>AssetScan auto-generates a unique QR code for every asset. Print and stick the label — now any team member can scan and pull up full asset details instantly.</p>
+        </div>
+      </div>
+      <div class="col-md-4" data-aos="fade-up" data-aos-delay="240">
+        <div class="step-card">
+          <div class="step-num">3</div>
+          <h5>Manage & Report</h5>
+          <p>Track checkouts, log maintenance, monitor depreciation, and export executive reports — all from one dashboard your whole team can access.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── HIGHLIGHT — QR SCAN ──────────────────────────────────────────────── -->
+<section class="highlight" style="background:var(--light);">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6 order-lg-2" data-aos="fade-left">
+        <div class="section-tag"><i class="bi bi-phone"></i> MOBILE SCANNING</div>
+        <h2 class="section-title">Scan. Know everything.<br>In seconds.</h2>
+        <p style="color:var(--mid); font-size:1rem; line-height:1.75; margin-bottom:32px;">No app to download. Open your browser, point your camera at the QR label, and instantly see the full asset profile — who has it, when it was last serviced, its current value, and its full history.</p>
+        <div class="highlight-feature">
+          <div class="highlight-feature-icon"><i class="bi bi-camera"></i></div>
+          <div>
+            <h6>Camera-based QR & barcode scanning</h6>
+            <p>Works on any modern smartphone browser. Rear camera auto-focuses. Supports QR codes and common barcode formats.</p>
+          </div>
+        </div>
+        <div class="highlight-feature">
+          <div class="highlight-feature-icon"><i class="bi bi-globe"></i></div>
+          <div>
+            <h6>Public scan page — no login required</h6>
+            <p>Share a public QR link so anyone can scan and view basic asset info without needing an account.</p>
+          </div>
+        </div>
+        <div class="highlight-feature">
+          <div class="highlight-feature-icon"><i class="bi bi-bell-fill"></i></div>
+          <div>
+            <h6>Haptic & audio feedback</h6>
+            <p>A beep and vibration confirm a successful scan. Instant result — no waiting, no page reload.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6 order-lg-1" data-aos="fade-right">
+        <div style="background:var(--dark); border-radius:20px; padding:32px; text-align:center; position:relative; overflow:hidden;">
+          <div style="position:absolute; top:0; left:0; right:0; bottom:0; background:radial-gradient(circle at 50% 50%, rgba(232,75,55,.12) 0%, transparent 70%);"></div>
+          <div style="position:relative;">
+            <div style="background:#1e293b; border-radius:28px; padding:24px; display:inline-block; margin-bottom:20px; border:1px solid rgba(255,255,255,.08);">
+              <i class="bi bi-qr-code" style="font-size:5rem; color:var(--brand);"></i>
+            </div>
+            <div style="background:#1e293b; border-radius:14px; padding:20px; border:1px solid rgba(255,255,255,.08); text-align:left;">
+              <div style="color:#64748b; font-size:.7rem; text-transform:uppercase; letter-spacing:.5px; margin-bottom:12px;">Asset Found</div>
+              <div style="color:#fff; font-weight:700; font-size:1rem; margin-bottom:4px;">MacBook Pro 16" M3</div>
+              <div style="color:#64748b; font-size:.8rem; margin-bottom:12px;">TAG-2024-00842</div>
+              <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                <span style="background:rgba(34,197,94,.15); color:#4ade80; border-radius:50px; padding:3px 10px; font-size:.72rem; font-weight:600;">Active</span>
+                <span style="background:rgba(96,165,250,.15); color:#60a5fa; border-radius:50px; padding:3px 10px; font-size:.72rem; font-weight:600;">Engineering</span>
+              </div>
+              <div style="margin-top:14px; padding-top:14px; border-top:1px solid rgba(255,255,255,.06);">
+                <div style="display:flex; justify-content:space-between; color:#94a3b8; font-size:.78rem; margin-bottom:6px;">
+                  <span>Assigned To</span><span style="color:#e2e8f0;">John Smith</span>
+                </div>
+                <div style="display:flex; justify-content:space-between; color:#94a3b8; font-size:.78rem; margin-bottom:6px;">
+                  <span>Book Value</span><span style="color:#4ade80;">$2,100</span>
+                </div>
+                <div style="display:flex; justify-content:space-between; color:#94a3b8; font-size:.78rem;">
+                  <span>Next Service</span><span style="color:#fbbf24;">Aug 2025</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── WHO IT'S FOR ─────────────────────────────────────────────────────── -->
+<section class="audience" id="who">
+  <div class="container">
+    <div class="text-center mb-5" data-aos="fade-up">
+      <div class="section-tag"><i class="bi bi-people"></i> WHO IT'S FOR</div>
+      <h2 class="section-title">Built for every<br>team size.</h2>
+      <p class="section-sub mx-auto">Whether you manage 50 laptops or 50,000 pieces of equipment across multiple locations — AssetScan handles it.</p>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="0">
+        <div class="audience-card">
+          <div class="audience-icon"><i class="bi bi-building"></i></div>
+          <h5>SMBs</h5>
+          <p>Replace messy spreadsheets with a proper system. Get up and running the same day with CSV import.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="80">
+        <div class="audience-card">
+          <div class="audience-icon"><i class="bi bi-hospital"></i></div>
+          <h5>Healthcare</h5>
+          <p>Track medical equipment, service schedules, and compliance records. Always audit-ready.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="160">
+        <div class="audience-card">
+          <div class="audience-icon"><i class="bi bi-mortarboard"></i></div>
+          <h5>Education</h5>
+          <p>Manage classrooms, labs, and IT equipment across campuses. Assign assets to departments or teachers.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="240">
+        <div class="audience-card">
+          <div class="audience-icon"><i class="bi bi-gear"></i></div>
+          <h5>Manufacturing</h5>
+          <p>Heavy equipment, tools, vehicles — schedule preventive maintenance and track depreciation to the cent.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SOCIAL PROOF ─────────────────────────────────────────────────────── -->
+<div class="proof">
+  <div class="container">
+    <div class="text-center mb-5" data-aos="fade-up">
+      <h2 class="proof-title">Trusted by operations teams worldwide.</h2>
+      <p class="proof-sub mt-2">What our customers say about AssetScan.</p>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-4" data-aos="fade-up" data-aos-delay="0">
+        <div class="proof-card">
+          <div class="proof-stars">★★★★★</div>
+          <p class="proof-text">"We went from a 400-row spreadsheet that nobody trusted to a live system everyone actually uses. The QR scanning alone saved our IT team hours every week."</p>
+          <div class="proof-author">Sarah M.</div>
+          <div class="proof-role">IT Manager, Regional Hospital</div>
+        </div>
+      </div>
+      <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+        <div class="proof-card">
+          <div class="proof-stars">★★★★★</div>
+          <p class="proof-text">"The executive dashboard is exactly what our CFO asked for. One click and the full asset value report is in a PDF ready to present to the board."</p>
+          <div class="proof-author">Ahmed K.</div>
+          <div class="proof-role">Operations Director, Manufacturing Co.</div>
+        </div>
+      </div>
+      <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+        <div class="proof-card">
+          <div class="proof-stars">★★★★★</div>
+          <p class="proof-text">"We track 3,000+ assets across 5 schools. AssetScan helped us catch $80K worth of equipment that had gone missing over the years. Paid for itself in week one."</p>
+          <div class="proof-author">Linda T.</div>
+          <div class="proof-role">Finance Director, School District</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── DEMO FORM ────────────────────────────────────────────────────────── -->
+<section class="demo-form" id="demo">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8" data-aos="fade-up">
+        <div class="form-card">
+          <div class="text-center mb-5">
+            <div class="section-tag mx-auto d-inline-flex"><i class="bi bi-calendar-check"></i> REQUEST A DEMO</div>
+            <h2 class="section-title mt-3">See AssetScan in action.</h2>
+            <p class="section-sub mx-auto">Fill in your details and our team will reach out within 24 hours to schedule a personalized walkthrough.</p>
+          </div>
+          <form id="demoForm" novalidate>
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label">First Name *</label>
+                <input type="text" class="form-control" name="first_name" placeholder="John" required>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Last Name *</label>
+                <input type="text" class="form-control" name="last_name" placeholder="Smith" required>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Work Email *</label>
+                <input type="email" class="form-control" name="email" placeholder="john@company.com" required>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Phone Number</label>
+                <input type="tel" class="form-control" name="phone" placeholder="+1 555 000 0000">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Company Name *</label>
+                <input type="text" class="form-control" name="company" placeholder="Acme Corp" required>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Industry</label>
+                <select class="form-select" name="industry">
+                  <option value="">Select industry…</option>
+                  <option>Healthcare</option>
+                  <option>Education</option>
+                  <option>Manufacturing</option>
+                  <option>Technology</option>
+                  <option>Government</option>
+                  <option>Retail</option>
+                  <option>Construction</option>
+                  <option>Other</option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Number of Assets (approx.)</label>
+                <select class="form-select" name="asset_count">
+                  <option value="">Select range…</option>
+                  <option>Under 100</option>
+                  <option>100 – 500</option>
+                  <option>500 – 2,000</option>
+                  <option>2,000 – 10,000</option>
+                  <option>10,000+</option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">How did you hear about us?</label>
+                <select class="form-select" name="source">
+                  <option value="">Select…</option>
+                  <option>Google Search</option>
+                  <option>LinkedIn</option>
+                  <option>Colleague / Referral</option>
+                  <option>Social Media</option>
+                  <option>Other</option>
+                </select>
+              </div>
+              <div class="col-12">
+                <label class="form-label">Message (optional)</label>
+                <textarea class="form-control" name="message" rows="3" placeholder="Tell us about your current asset tracking challenges…"></textarea>
+              </div>
+              <div class="col-12 mt-2">
+                <button type="submit" class="btn-submit">
+                  <span id="submitText"><i class="bi bi-send me-2"></i>Request My Demo</span>
+                  <span id="submitLoading" style="display:none;"><i class="bi bi-arrow-repeat me-2" style="animation:spin .8s linear infinite;"></i>Sending…</span>
+                </button>
+              </div>
+              <div class="col-12">
+                <div id="formSuccess" style="display:none;" class="alert alert-success border-0 rounded-3 mt-2">
+                  <i class="bi bi-check-circle-fill me-2"></i><strong>Thank you!</strong> We'll be in touch within 24 hours to schedule your demo.
+                </div>
+                <div id="formError" style="display:none;" class="alert alert-danger border-0 rounded-3 mt-2">
+                  <i class="bi bi-exclamation-triangle-fill me-2"></i>Something went wrong. Please email us at <a href="mailto:hello@assetscan.online">hello@assetscan.online</a>
+                </div>
+              </div>
+            </div>
+          </form>
+          <p class="text-center text-muted mt-4 mb-0" style="font-size:.8rem;">
+            <i class="bi bi-lock me-1"></i>Your information is secure and will never be shared with third parties.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ───────────────────────────────────────────────────────────── -->
+<footer>
+  <div class="container">
+    <div class="row g-5">
+      <div class="col-lg-4">
+        <div class="footer-brand">Asset<span>Scan</span></div>
+        <p class="footer-desc">Smart asset management for modern teams. Track, manage, and report on every asset from scan to disposal.</p>
+        <div class="footer-social mt-4">
+          <a href="#" title="LinkedIn"><i class="bi bi-linkedin"></i></a>
+          <a href="#" title="Twitter"><i class="bi bi-twitter-x"></i></a>
+          <a href="#" title="GitHub"><i class="bi bi-github"></i></a>
+        </div>
+      </div>
+      <div class="col-6 col-lg-2">
+        <div class="footer-heading">Product</div>
+        <a href="#features" class="footer-link">Features</a>
+        <a href="#how-it-works" class="footer-link">How It Works</a>
+        <a href="#demo" class="footer-link">Request Demo</a>
+        <a href="/asset-manager/modules/dashboard/index.php" class="footer-link">Log In</a>
+      </div>
+      <div class="col-6 col-lg-2">
+        <div class="footer-heading">Use Cases</div>
+        <a href="#who" class="footer-link">Healthcare</a>
+        <a href="#who" class="footer-link">Education</a>
+        <a href="#who" class="footer-link">Manufacturing</a>
+        <a href="#who" class="footer-link">SMBs</a>
+      </div>
+      <div class="col-6 col-lg-2">
+        <div class="footer-heading">Company</div>
+        <a href="#" class="footer-link">About</a>
+        <a href="#" class="footer-link">Privacy Policy</a>
+        <a href="#" class="footer-link">Terms of Service</a>
+        <a href="#" class="footer-link">Contact</a>
+      </div>
+      <div class="col-6 col-lg-2">
+        <div class="footer-heading">Contact</div>
+        <a href="mailto:hello@assetscan.online" class="footer-link"><i class="bi bi-envelope me-1"></i>hello@assetscan.online</a>
+        <a href="#demo" class="footer-link"><i class="bi bi-calendar me-1"></i>Book a Demo</a>
+      </div>
+    </div>
+    <div class="footer-bottom d-flex flex-wrap justify-content-between align-items-center gap-2">
+      <span>© 2025 AssetScan. All rights reserved.</span>
+      <span>Made with <span style="color:var(--brand);">♥</span> for operations teams everywhere.</span>
+    </div>
+  </div>
+</footer>
+
+<style>
+@keyframes spin { to { transform: rotate(360deg); } }
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script>
+  AOS.init({ once: true, offset: 60, duration: 600 });
+
+  // Smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    });
+  });
+
+  // Form submission (frontend only — wire to backend later)
+  document.getElementById('demoForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const btn = this.querySelector('.btn-submit');
+    document.getElementById('submitText').style.display = 'none';
+    document.getElementById('submitLoading').style.display = 'inline';
+    btn.disabled = true;
+
+    // Simulate — replace with real fetch() to form handler
+    setTimeout(() => {
+      document.getElementById('submitLoading').style.display = 'none';
+      document.getElementById('submitText').style.display = 'inline';
+      btn.disabled = false;
+      document.getElementById('formSuccess').style.display = 'block';
+      this.reset();
+    }, 1500);
+  });
+</script>
+</body>
+</html>

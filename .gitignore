@@ -1,0 +1,20 @@
+# Uploads (user files, photos, documents)
+uploads/
+
+# Config with credentials
+config/db.php
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# PHP logs
+*.log
+error_log
+
+# IDE
+.vscode/
+.idea/
+
+# Composer
+vendor/
