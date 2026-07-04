@@ -5,16 +5,5 @@ RewriteEngine On
 RewriteCond %{HTTP_HOST} ^www\.assetscan\.online [NC]
 RewriteRule ^(.*)$ http://assetscan.online/$1 [L,R=301]
 
-# Allow direct access to all PHP files
-<FilesMatch "\.php$">
-    Allow from all
-</FilesMatch>
-
-# Prevent direct access to config/db.php
-<Files "db.php">
-    Order allow,deny
-    Deny from all
-</Files>
-
 # Landing page as homepage
 RewriteRule ^$ /landing/index.html [L]
