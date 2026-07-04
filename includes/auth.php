@@ -9,7 +9,7 @@ function isLoggedIn(): bool {
 
 function requireLogin(): void {
     if (!isLoggedIn()) {
-        header('Location: /index.php');
+        header('Location: /login.php');
         exit;
     }
 }
