@@ -429,14 +429,21 @@ require_once __DIR__ . '/../../includes/header.php';
       <div class="card-header"><i class="bi bi-qr-code me-2"></i>QR Code</div>
       <div class="card-body">
         <?php if ($a['qr_code_path'] && file_exists(__DIR__ . '/../../' . $a['qr_code_path'])): ?>
-        <img src="/<?= e($a['qr_code_path']) ?>" alt="QR Code" class="img-fluid" style="max-width:180px;">
+        <img src="/<?= e($a['qr_code_path']) ?>?v=<?= time() ?>" alt="QR Code" class="img-fluid" style="max-width:180px;">
         <?php else: ?>
         <div class="text-muted py-3"><i class="bi bi-qr-code" style="font-size:60px;opacity:.3;"></i><br>QR not generated</div>
         <?php endif; ?>
-        <div class="mt-3">
-          <a href="qr.php?id=<?= $id ?>" class="btn btn-success btn-sm w-100" target="_blank">
+        <div class="mt-3 d-grid gap-2">
+          <a href="qr.php?id=<?= $id ?>" class="btn btn-success btn-sm" target="_blank">
             <i class="bi bi-printer me-1"></i> Print QR Label
           </a>
+          <form method="POST" action="/modules/assets/qr_generate.php">
+            <input type="hidden" name="id" value="<?= $id ?>">
+            <button type="submit" class="btn btn-outline-primary btn-sm w-100">
+              <i class="bi bi-arrow-clockwise me-1"></i>
+              <?= ($a['qr_code_path'] && file_exists(__DIR__ . '/../../' . $a['qr_code_path'])) ? 'Regenerate QR' : 'Generate QR' ?>
+            </button>
+          </form>
         </div>
       </div>
     </div>
