@@ -19,7 +19,7 @@ $path = generateQRCode($a['id'], $a['asset_tag'], true);
 $pdo->prepare("UPDATE assets SET qr_code_path = ? WHERE id = ?")
     ->execute([$path, $a['id']]);
 
-auditLog($pdo, 'qr_generated', 'assets', $a['id'], 'QR code generated for ' . $a['asset_tag']);
+auditLog($pdo, 'qr_generated', 'assets', $a['id'], null, ['asset_tag' => $a['asset_tag']]);
 setFlash('success', 'QR code generated for ' . $a['asset_tag']);
 header('Location: /modules/assets/view.php?id=' . $id);
 exit;
