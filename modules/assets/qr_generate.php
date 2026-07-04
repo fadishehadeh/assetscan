@@ -14,10 +14,10 @@ $a = $asset->fetch();
 
 if (!$a) { header('Location: /modules/assets/index.php'); exit; }
 
-generateQRCode($a['id'], $a['asset_tag']);
+$path = generateQRCode($a['id'], $a['asset_tag'], true);
 
 $pdo->prepare("UPDATE assets SET qr_code_path = ? WHERE id = ?")
-    ->execute(['uploads/qr/asset_' . $a['id'] . '.png', $a['id']]);
+    ->execute([$path, $a['id']]);
 
 auditLog($pdo, 'qr_generated', 'assets', $a['id'], 'QR code generated for ' . $a['asset_tag']);
 setFlash('success', 'QR code generated for ' . $a['asset_tag']);

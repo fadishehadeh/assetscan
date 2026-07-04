@@ -31,16 +31,18 @@ function generateAssetTag(PDO $pdo): string {
 }
 
 // ── QR Code generation ────────────────────────────────────────
-function generateQRCode(int $assetId, string $assetTag): string {
-    $qrDir  = __DIR__ . '/../uploads/qrcodes/';
-    $file   = $qrDir . 'asset_' . $assetId . '.png';
-    $url    = 'http://' . $_SERVER['HTTP_HOST'] . '/modules/assets/view.php?id=' . $assetId;
+function generateQRCode(int $assetId, string $assetTag, bool $force = false): string {
+    $qrDir = __DIR__ . '/../uploads/qr/';
+    if (!is_dir($qrDir)) { mkdir($qrDir, 0755, true); }
+    $file = $qrDir . 'asset_' . $assetId . '.png';
+    $host = $_SERVER['HTTP_HOST'] ?? 'assetscan.online';
+    $url  = 'https://' . $host . '/modules/assets/view.php?id=' . $assetId;
 
-    if (!file_exists($file)) {
+    if ($force || !file_exists($file)) {
         require_once __DIR__ . '/../libs/phpqrcode/qrlib.php';
         QRcode::png($url, $file, QR_ECLEVEL_M, 6, 2);
     }
-    return 'uploads/qrcodes/asset_' . $assetId . '.png';
+    return 'uploads/qr/asset_' . $assetId . '.png';
 }
 
 // ── Depreciation calculation ──────────────────────────────────
