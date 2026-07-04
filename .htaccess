@@ -3,7 +3,11 @@ RewriteEngine On
 
 # Redirect www to non-www
 RewriteCond %{HTTP_HOST} ^www\.assetscan\.online [NC]
-RewriteRule ^(.*)$ http://assetscan.online/$1 [L,R=301]
+RewriteRule ^(.*)$ https://assetscan.online/$1 [L,R=301]
+
+# Force HTTPS
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
 # Landing page as homepage
 RewriteRule ^$ /landing/index.html [L]
