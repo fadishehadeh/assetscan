@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $user = $st->fetch();
 
         if ($user && password_verify($password, $user['password_hash'])) {
-            if ($user['otp_enabled']) {
+            if (!empty($user['otp_enabled'])) {
                 // Trigger OTP flow
                 $_SESSION['pending_user_id'] = $user['id'];
                 header('Location: /otp.php');

@@ -204,6 +204,9 @@ ob_start();
     <li><a class="nav-link <?= navActive('/audit/') ?>" href="/modules/audit/index.php">
       <i class="bi bi-shield-check"></i> Audit Log
     </a></li>
+    <li><a class="nav-link <?= navActive('/settings/data_tools') ?>" href="/modules/settings/data_tools.php">
+      <i class="bi bi-database-gear"></i> Data Tools
+    </a></li>
     <?php endif; ?>
     <li><span class="nav-section-label">Account</span></li>
     <li><a class="nav-link <?= navActive('/profile/') ?>" href="/modules/profile/index.php">
