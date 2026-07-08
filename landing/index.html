@@ -3,8 +3,50 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AssetScan | Smart Asset Management for Modern Teams</title>
-  <meta name="description" content="Track, manage, and optimize your company assets with AssetScan. QR scanning, maintenance scheduling, depreciation tracking and more.">
+  <title>AssetScan | Asset Management Software for MENA Teams</title>
+  <meta name="description" content="AssetScan is a self-hosted asset management system for businesses in the Arab world and beyond. Track assets with QR codes, manage maintenance, depreciation, and disposals — installed on your own server, one-time license, no subscription.">
+  <link rel="canonical" href="https://assetscan.online/">
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website">
+  <meta property="og:url"         content="https://assetscan.online/">
+  <meta property="og:title"       content="AssetScan | Asset Management Software for MENA Teams">
+  <meta property="og:description" content="Self-hosted asset management for businesses in the Arab world. QR scanning, depreciation tracking, maintenance scheduling — one-time license, no subscription.">
+  <meta property="og:image"       content="https://assetscan.online/assets/img/og-image.png">
+  <meta property="og:locale"      content="en_US">
+  <meta property="og:site_name"   content="AssetScan">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:title"       content="AssetScan | Asset Management Software for MENA Teams">
+  <meta name="twitter:description" content="Self-hosted asset management for businesses in the Arab world. One-time license, installed on your server.">
+  <meta name="twitter:image"       content="https://assetscan.online/assets/img/og-image.png">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "AssetScan",
+    "url": "https://assetscan.online/",
+    "description": "Self-hosted asset management system for businesses in the MENA region. Track assets with QR codes, manage maintenance, depreciation, and disposals.",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Web",
+    "offers": {
+      "@type": "Offer",
+      "priceCurrency": "USD",
+      "price": "0",
+      "description": "One-time license fee — contact for pricing"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "AssetScan",
+      "url": "https://assetscan.online/",
+      "email": "hello@assetscan.online"
+    }
+  }
+  </script>
+
   <link rel="icon" type="image/svg+xml" href="/assets/img/favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1073,22 +1115,33 @@
     });
   });
 
-  // Form submission (frontend only  wire to backend later)
   document.getElementById('demoForm').addEventListener('submit', function(e) {
     e.preventDefault();
-    const btn = this.querySelector('.btn-submit');
+    const btn  = this.querySelector('.btn-submit');
+    const ok   = document.getElementById('formSuccess');
+    const err  = document.getElementById('formError');
+    ok.style.display = 'none';
+    err.style.display = 'none';
     document.getElementById('submitText').style.display = 'none';
     document.getElementById('submitLoading').style.display = 'inline';
     btn.disabled = true;
 
-    // Simulate  replace with real fetch() to form handler
-    setTimeout(() => {
-      document.getElementById('submitLoading').style.display = 'none';
-      document.getElementById('submitText').style.display = 'inline';
-      btn.disabled = false;
-      document.getElementById('formSuccess').style.display = 'block';
-      this.reset();
-    }, 1500);
+    fetch('/landing/submit.php', { method: 'POST', body: new FormData(this) })
+      .then(r => r.json())
+      .then(data => {
+        if (data.ok) {
+          ok.style.display = 'block';
+          this.reset();
+        } else {
+          err.style.display = 'block';
+        }
+      })
+      .catch(() => { err.style.display = 'block'; })
+      .finally(() => {
+        document.getElementById('submitLoading').style.display = 'none';
+        document.getElementById('submitText').style.display = 'inline';
+        btn.disabled = false;
+      });
   });
 </script>
 </body>
