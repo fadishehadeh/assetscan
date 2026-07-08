@@ -3,6 +3,7 @@ uploads/
 
 # Config with credentials
 config/db.php
+config/mail.php
 
 # OS files
 .DS_Store

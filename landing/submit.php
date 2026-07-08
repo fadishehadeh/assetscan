@@ -65,12 +65,13 @@ $html = "
 </div>";
 
 // ── Mailjet API ──────────────────────────────────────────────────────────────
-$apiKey  = '52a50c2c536f896054b8a36ef928817c';
-$secret  = 'da2bd1c30dbd521c47129c8cfddb1d6e';
-$from    = 'hello@assetscan.online';
-$fromName = 'AssetScan';
-$to      = 'fshehadeh@gmail.com';
-$toName  = 'Fadi';
+require_once __DIR__ . '/../config/mail.php';
+$apiKey   = MAILJET_API_KEY;
+$secret   = MAILJET_SECRET;
+$from     = MAILJET_FROM_EMAIL;
+$fromName = MAILJET_FROM_NAME;
+$to       = MAILJET_NOTIFY;
+$toName   = 'AssetScan';
 
 $payload = json_encode([
     'Messages' => [[
